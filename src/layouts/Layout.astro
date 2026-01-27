@@ -3,6 +3,8 @@ import "../styles/global.css";
 import Nav from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import { ClientRouter } from "astro:transitions";
+
+const { title = "Trip2Go - Your Guide to the World" } = Astro.props;
 ---
 
 <!doctype html>
@@ -10,7 +12,8 @@ import { ClientRouter } from "astro:transitions";
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Trip2Go - Your Guide to the World</title>
+        <link rel="icon" type="image/png" href="/logo.png" />
+        <title>{title}</title>
         <ClientRouter />
         <!-- Fonts: Plus Jakarta Sans -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -1,0 +1,107 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import Hero from "../../components/Hero.astro";
+import heroImage from "../../assets/blog-head.jpg";
+
+// Load all posts (new Astro way)
+const posts = Object.values(
+    import.meta.glob("../../posts/*.md", { eager: true }),
+);
+
+// Sort posts by date (newest first)
+const sortedPosts = posts.sort(
+    (a: any, b: any) =>
+        new Date(b.frontmatter.date).valueOf() -
+        new Date(a.frontmatter.date).valueOf(),
+);
+
+// Load all blog images
+const images = import.meta.glob<{ default: ImageMetadata }>(
+    "/src/assets/blog/*.{jpeg,jpg,png,gif}",
+);
+
+// Resolve images BEFORE rendering
+const postsWithImages = await Promise.all(
+    sortedPosts.map(async (post: any) => {
+        const imagePath = `/src/assets/blog/${post.frontmatter.image}`;
+        const imageLoader = images[imagePath];
+        const image = imageLoader ? (await imageLoader()).default : null;
+
+        return { post, image };
+    }),
+);
+---
+
+<Layout title="Travel Blog | Trip2Go">
+    <Hero
+        PageName="blog"
+        image={heroImage}
+        title="Travel Blog"
+        subtitle="Tips, guides, and inspiration for your next adventure."
+    />
+
+    <!-- Blog Grid -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {
+                    postsWithImages.map(({ post, image }) => (
+                        <article class="bg-white shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 group">
+                            <a
+                                href={`/blog/${post.frontmatter.slug}`}
+                                class="h-full flex flex-col"
+                            >
+                                <div class="relative h-64 overflow-hidden">
+                                    {image && (
+                                        <Image
+                                            src={image}
+                                            alt={post.frontmatter.title}
+                                            width={720}
+                                            quality={80}
+                                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                        />
+                                    )}
+
+                                    <div class="absolute top-4 left-4 bg-brand-yellow text-gray-900 text-xs font-bold px-3 py-1 uppercase tracking-wider">
+                                        {post.frontmatter.tags?.[0]}
+                                    </div>
+                                </div>
+
+                                <div class="p-6 flex-1 flex flex-col">
+                                    <div class="flex items-center text-sm text-gray-500 mb-4 space-x-4">
+                                        <span class="flex items-center">
+                                            <span class="ri-calendar-line mr-2 text-brand-blue" />
+                                            {new Date(
+                                                post.frontmatter.date,
+                                            ).toLocaleDateString("en-US", {
+                                                month: "long",
+                                                day: "numeric",
+                                                year: "numeric",
+                                            })}
+                                        </span>
+                                    </div>
+
+                                    <h2 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-blue transition-colors line-clamp-2">
+                                        {post.frontmatter.title}
+                                    </h2>
+
+                                    <p class="text-gray-600 mb-6 line-clamp-3 leading-relaxed flex-1">
+                                        {post.frontmatter.excerpt}
+                                    </p>
+
+                                    <div class="flex items-center justify-between pt-6 border-t border-gray-100 mt-auto">
+                                        <span class="text-sm font-semibold text-gray-900 group-hover:text-brand-blue transition-colors">
+                                            Read Article
+                                        </span>
+                                        <span class="ri-arrow-right-line text-brand-yellow text-xl group-hover:translate-x-1 transition-transform" />
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+</Layout>
