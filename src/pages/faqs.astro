@@ -1,0 +1,72 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import heroImage from "../assets/faqs.jpg";
+
+const FAQs = [
+    {
+        question: "Documents Needed to Apply for a Schengen Visa?",
+        answer: "A valid passport is required, and our expert team will assist with other documents like travel itineraries, accommodation proof, financial statements, and travel insurance. We guide you through every step for a smooth visa process.",
+    },
+    {
+        question: "What is the Processing Time for a Visa Application?",
+        answer: "Processing times vary by country due to local regulations and requirements. We are committed to providing an efficient and seamless experience, with typical processing times ranging from several business days to several weeks, depending on the complexity and jurisdiction involved.",
+    },
+    {
+        question: "Do you guarantee visa approval?",
+        answer: "Although we achieve consistently high success rates, ultimate approval is contingent upon meeting specific embassy requirements. Our expert team maximizes your chances of success by providing meticulous documentation preparation and comprehensive application guidance.",
+    },
+    {
+        question: "Can I track my visa application status?",
+        answer: "Yes, our services include continuous application tracking with regular status updates, delivering complete visibility and confidence throughout your application journey.",
+    },
+    {
+        question:
+            "Data Privacy and Security with Our Schengen Visa Consultancy?",
+        answer: "Data security and privacy are fundamental priorities in our service delivery. We utilize advanced encryption technologies that meet industry standards to protect your personal information throughout all transmission processes. Our fully GDPR-compliant infrastructure ensures responsible data management through stringent access controls and a minimal data collection policy, gathering only information essential for visa application requirements.",
+    },
+];
+---
+
+<Layout>
+    <Hero
+        PageName="faqs"
+        image={heroImage}
+        title="FAQs"
+        subtitle="Answers to your most common travel and visa questions."
+    />
+    <main class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-3xl mx-auto space-y-6">
+            {
+                FAQs.map((faq) => (
+                    <details class="group bg-white rounded-none shadow-sm border border-gray-200 overflow-hidden open:shadow-md transition-all duration-300">
+                        <summary class="flex items-center justify-between p-6 cursor-pointer bg-white group-open:bg-gray-50 transition-colors">
+                            <h3 class="text-lg font-bold text-gray-900 pr-4">
+                                {faq.question}
+                            </h3>
+                            <span class="shrink-0 ml-1.5 p-1.5 text-gray-900 bg-gray-100 rounded-full group-hover:bg-brand-yellow transition-colors group-open:rotate-180 transform duration-300">
+                                <svg
+                                    class="w-5 h-5 text-gray-900"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M19 9l-7 7-7-7"
+                                    />
+                                </svg>
+                            </span>
+                        </summary>
+                        <div class="px-6 pb-6 text-gray-600 leading-relaxed group-open:animate-fadeIn">
+                            <p>{faq.answer}</p>
+                        </div>
+                    </details>
+                ))
+            }
+        </div>
+    </main>
+</Layout>

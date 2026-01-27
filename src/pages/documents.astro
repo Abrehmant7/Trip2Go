@@ -1,0 +1,50 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import heroImage from "../assets/documents.jpg";
+---
+
+<Layout>
+    <Hero
+        PageName="documents"
+        image={heroImage}
+        title="Documents"
+        subtitle="Your Documents Matter."
+    />
+    <main class="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
+                Visa & Document Assistance
+            </h2>
+            <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                Navigating the complex world of travel documentation can be
+                daunting. At Trip2Go, we ensure you don't miss a single
+                requirement. Our team stays up-to-date with the latest visa and
+                embassy regulations to make your trip less risky and completely
+                hassle-free.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 text-left mb-12">
+                <div class="bg-gray-50 p-6 border-l-4 border-brand-yellow">
+                    <h3 class="text-xl font-bold mb-2">Visa Compliance</h3>
+                    <p class="text-gray-600">
+                        We verify all your documents against specific embassy
+                        requirements to prevent rejections.
+                    </p>
+                </div>
+                <div class="bg-gray-50 p-6 border-l-4 border-brand-yellow">
+                    <h3 class="text-xl font-bold mb-2">Cover Letter Support</h3>
+                    <p class="text-gray-600">
+                        We help craft professional cover letters to describe
+                        your eligibility clearly and strengthen your case.
+                    </p>
+                </div>
+            </div>
+            <a
+                href="/contact"
+                class="bg-brand-yellow text-gray-900 font-bold py-3 px-10 text-lg rounded-none hover:bg-gray-900 hover:text-white transition-all duration-300 shadow-xl inline-block"
+            >
+                Get Document Help
+            </a>
+        </div>
+    </main>
+</Layout>

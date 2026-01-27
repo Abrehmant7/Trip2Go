@@ -1,0 +1,127 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { countries } from "../../data/countries";
+
+export async function getStaticPaths() {
+    // Filter countries that have an image (which implies a detail page exists)
+    const detailCountries = countries.filter((country) => country.image);
+
+    return detailCountries.map((country) => ({
+        params: { slug: country.slug },
+        props: { country },
+    }));
+}
+
+const { country } = Astro.props;
+
+const requiredDocs = [
+    {
+        id: 1,
+        title: "Current Biopage Passport Picture",
+    },
+    {
+        id: 2,
+        title: "Share code of Immigration Status and E-Visa expiry date",
+    },
+    {
+        id: 3,
+        title: "Current UK Address",
+    },
+    {
+        id: 4,
+        title: "Name of the company",
+    },
+    {
+        id: 5,
+        title: "Your job title or designation",
+    },
+    {
+        id: 6,
+        title: "Address of company",
+    },
+    {
+        id: 7,
+        title: "Contact number of your company",
+    },
+    {
+        id: 8,
+        title: "E-mail address of the company",
+    },
+];
+
+import { Image } from "astro:assets";
+---
+
+<Layout>
+    <header class="relative h-[60vh] md:h-[70vh] w-full">
+        <!-- Background Image -->
+        <Image
+            src={country.image}
+            alt={`${country.name} Background`}
+            class="w-full h-full object-cover"
+            widths={[640, 1024, 1920]}
+            sizes="(max-width: 640px) 640px, (max-width: 1024px) 1024px, 100vw"
+        />
+        <div
+            class="absolute inset-0 bg-linear-to-t from-black/70 to-transparent"
+        >
+        </div>
+
+        <!-- Title Positioned Bottom Left -->
+        <div
+            class="absolute bottom-10 left-6 md:bottom-16 md:left-20 text-white"
+        >
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tight">
+                {country.name}
+            </h1>
+            {
+                country.description && (
+                    <p class="mt-4 text-lg md:text-xl text-gray-200 max-w-2xl font-medium drop-shadow-md">
+                        {country.description}
+                    </p>
+                )
+            }
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <main class="max-w-4xl mx-auto px-4 py-16 md:py-24 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+            Visa Requirements
+        </h2>
+        <p class="text-gray-500 text-lg mb-12 font-medium">
+            These are the things we require from your side to process your
+            application.
+        </p>
+
+        <!-- Requirements Card -->
+        <div
+            class="bg-white border border-gray-100 shadow-xl p-8 md:p-12 text-left"
+        >
+            <ul class="space-y-6">
+                {
+                    requiredDocs.map((doc) => (
+                        <li class="flex items-start gap-4">
+                            <span class="shrink-0 w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-sm">
+                                {doc.id}
+                            </span>
+                            <span class="text-gray-700 text-lg pt-0.5">
+                                {doc.title}
+                            </span>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+
+        <!-- Apply Now Button (Connected to /contact) -->
+        <div class="mt-12 md:mt-6">
+            <a
+                href="/contact"
+                class="inline-block bg-brand-yellow text-gray-900 font-bold py-4 px-10 shadow-lg hover:bg-yellow-400 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-lg uppercase tracking-wider"
+            >
+                Apply Now
+            </a>
+        </div>
+    </main>
+</Layout>

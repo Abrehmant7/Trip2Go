@@ -1,0 +1,158 @@
+---
+import "../styles/global.css";
+import { Image } from "astro:assets";
+import logoNew from "../assets/logo-new.png";
+
+const leftLinks = [
+    { href: "/", label: "Home" },
+    { href: "/destinations", label: "Destinations" },
+    { href: "/blog", label: "Blog" },
+    { href: "/faqs", label: "FAQs" },
+];
+
+const rightLinks = [
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
+    { href: "/refund-policy", label: "Refund" },
+    { href: "/privacy-policy", label: "Privacy" },
+];
+
+const mobileLinks = [...leftLinks, ...rightLinks];
+const currentPath = Astro.url.pathname;
+---
+
+<!-- Navigation (Transparent) -->
+<nav class="absolute top-0 w-full z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <!-- Mobile Logo (Left) -->
+            <div class="flex items-center md:hidden">
+                <a href="/" class="block">
+                    <Image
+                        class="h-10 w-auto drop-shadow-lg rounded-full"
+                        src={logoNew}
+                        alt="Trip2Go"
+                        width={80}
+                    />
+                </a>
+            </div>
+
+            <!-- Desktop Split Menu -->
+            <div class="hidden md:flex flex-1 items-center justify-between">
+                <!-- Left Links -->
+                <div
+                    class="flex md:space-x-3 lg:space-x-10 flex-1 justify-end md:mr-4 lg:mr-12"
+                >
+                    {
+                        leftLinks.map((link) => (
+                            <a
+                                href={link.href}
+                                class:list={[
+                                    "text-xs lg:text-sm font-bold tracking-widest uppercase transition-colors drop-shadow-md hover:text-brand-yellow",
+                                    currentPath === link.href ||
+                                    (link.href !== "/" &&
+                                        currentPath.startsWith(link.href))
+                                        ? "text-brand-yellow"
+                                        : "text-white",
+                                ]}
+                            >
+                                {link.label}
+                            </a>
+                        ))
+                    }
+                </div>
+
+                <!-- Center Logo -->
+                <div class="shrink-0 md:mx-4 lg:mx-6">
+                    <a
+                        href="/"
+                        class="block hover:opacity-90 transition-opacity duration-300"
+                    >
+                        <Image
+                            class="h-12 lg:h-16 w-auto drop-shadow-2xl rounded-full"
+                            src={logoNew}
+                            alt="Trip2Go"
+                            width={128}
+                        />
+                    </a>
+                </div>
+
+                <!-- Right Links -->
+                <div
+                    class="flex md:space-x-3 lg:space-x-10 flex-1 justify-start md:ml-4 lg:ml-12"
+                >
+                    {
+                        rightLinks.map((link) => (
+                            <a
+                                href={link.href}
+                                class:list={[
+                                    "text-xs lg:text-sm font-bold tracking-widest uppercase transition-colors drop-shadow-md hover:text-brand-yellow",
+                                    currentPath === link.href ||
+                                    (link.href !== "/" &&
+                                        currentPath.startsWith(link.href))
+                                        ? "text-brand-yellow"
+                                        : "text-white",
+                                ]}
+                            >
+                                {link.label}
+                            </a>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="flex items-center md:hidden">
+                <button
+                    type="button"
+                    id="mobile-menu-btn"
+                    class="inline-flex items-center justify-center p-2 rounded-none text-white hover:text-brand-yellow focus:outline-none"
+                    aria-controls="mobile-menu"
+                    aria-expanded="false"
+                >
+                    <span class="sr-only">Open main menu</span>
+                    <i class="ri-menu-line text-3xl drop-shadow-md"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu (White Background, absolute) -->
+    <div
+        class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl"
+        id="mobile-menu"
+    >
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {
+                mobileLinks.map((link) => (
+                    <a
+                        href={link.href}
+                        class:list={[
+                            "block px-3 py-2 rounded-none text-base font-bold bg-blue-50 hover:text-brand-yellow",
+                            currentPath === link.href ||
+                            (link.href !== "/" &&
+                                currentPath.startsWith(link.href))
+                                ? "text-brand-yellow"
+                                : "text-brand-blue",
+                        ]}
+                    >
+                        {link.label}
+                    </a>
+                ))
+            }
+        </div>
+    </div>
+</nav>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const btn = document.getElementById("mobile-menu-btn");
+        const menu = document.getElementById("mobile-menu");
+
+        if (btn && menu) {
+            btn.addEventListener("click", () => {
+                menu.classList.toggle("hidden");
+            });
+        }
+    });
+</script>

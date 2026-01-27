@@ -1,0 +1,52 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PopularDestinations from "../components/PopularDestinations.astro";
+import Hero from "../components/Hero.astro";
+import heroImage from "../assets/holiday.jpg";
+---
+
+<Layout>
+    <Hero
+        PageName="packages"
+        image={heroImage}
+        title="Packages"
+        subtitle="Unforgettable experiences at unbeatable prices."
+    />
+    <main class="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
+                Curated for You
+            </h2>
+            <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                We scour the market to find the best quality flights, hotels,
+                and activities for as little price as possible. Our dedicated
+                team constantly updates their knowledge of global destinations
+                to ensure you get the most value out of your trip.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 text-left mb-12">
+                <div class="bg-gray-50 p-6 border-l-4 border-brand-yellow">
+                    <h3 class="text-xl font-bold mb-2">Best Price Guarantee</h3>
+                    <p class="text-gray-600">
+                        We find the hidden gems and deal combinations that
+                        others miss.
+                    </p>
+                </div>
+                <div class="bg-gray-50 p-6 border-l-4 border-brand-yellow">
+                    <h3 class="text-xl font-bold mb-2">Complete Itineraries</h3>
+                    <p class="text-gray-600">
+                        From arrival to departure, every activity is planned for
+                        your enjoyment.
+                    </p>
+                </div>
+            </div>
+            <a
+                href="contact.html"
+                class="bg-brand-yellow text-gray-900 font-bold py-3 px-10 text-lg rounded-none hover:bg-gray-900 hover:text-white transition-all duration-300 shadow-xl inline-block"
+            >
+                Plan My Holiday
+            </a>
+        </div>
+    </main>
+
+    <PopularDestinations />
+</Layout>

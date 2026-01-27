@@ -1,0 +1,36 @@
+---
+import { Image } from "astro:assets";
+import heroImg from "../assets/last-section.jpg";
+---
+
+<!-- Call to Action Section -->
+<section
+    class="relative py-24 md:py-32 flex items-center justify-center overflow-hidden"
+>
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+        <Image
+            src={heroImg}
+            alt="Travel Adventure"
+            class="w-full h-full object-cover"
+            widths={[640, 1024, 1920]}
+            sizes="(max-width: 640px) 100vw, 100vw"
+        />
+        <div class="absolute inset-0 bg-black/50"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        <h2
+            class="text-4xl md:text-6xl font-extrabold text-white mb-8 leading-tight drop-shadow-xl"
+        >
+            Start Your Next Great <br />Adventure With Trip2Go
+        </h2>
+        <a
+            href="/contact"
+            class="bg-brand-yellow text-gray-900 font-bold py-4 px-10 text-lg rounded-none hover:bg-white transition-all duration-300 shadow-xl transform hover:-translate-y-1 inline-block"
+        >
+            Contact Us
+        </a>
+    </div>
+</section>

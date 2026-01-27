@@ -1,29 +1,19 @@
-# Astro Starter Kit: Minimal
+# Trip2Go - Travel Agency Website
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Trip2Go is a modern, high-performance travel agency website built with Astro. It features comprehensive visa consultation services, flight booking integration, and destination showcases, all delivered via a fully responsive and optimized user interface.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Features
 
-## 🚀 Project Structure
+- **Dynamic Visa Services**: Detailed visa consultation pages.
+- **Flight Booking**: Integration with flight search and booking flows.
+- **Responsive Design**: Mobile-first layout using Tailwind CSS.
+- **High Performance**: Built on Astro for blazing fast static site generation.
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🛠️ Tech Stack
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
+- **Framework**: [Astro](https://astro.build)
+- **Styling**: Tailwind CSS
+- **Icons**: Remix Icon
 
 ## 🧞 Commands
 
@@ -37,7 +27,3 @@ All commands are run from the root of the project, from a terminal:
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

@@ -1,0 +1,169 @@
+---
+import "../styles/global.css";
+import { Image } from "astro:assets";
+import documentsImg from "../assets/documents.jpg";
+
+const services = [
+    {
+        id: "holiday-packages",
+        icon: "ri-earth-line",
+        title: "Cheapest Holiday Packages",
+        description:
+            "Discover unbeatable deals on holiday packages for unforgettable adventures.",
+        link: "packages",
+    },
+    {
+        id: "flight-tickets",
+        icon: "ri-plane-fill",
+        title: "Cheapest Air Tickets",
+        description:
+            "Get the best airfare rates with our extensive network of airline partners.",
+        link: "flights",
+    }
+];
+---
+
+<!-- Services Section -->
+<section class="py-16 md:py-24 bg-brand-blue relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            <!-- Left Column: Header + 2 Cards -->
+            <div class="lg:col-span-8 flex flex-col">
+                <!-- Header -->
+                <div class="mb-12">
+                    <h2
+                        class="text-4xl md:text-5xl font-extrabold text-white mb-6 drop-shadow-sm"
+                    >
+                        What Trip2Go does for you
+                    </h2>
+                    <p class="text-lg text-blue-100 leading-relaxed max-w-2xl">
+                        Trip2Go provides comprehensive travel solutions tailored
+                        to your needs. From finding the perfect holiday package
+                        to securing visas and flight tickets, we handle it all
+                        so you can travel with peace of mind.
+                    </p>
+                </div>
+
+                <!-- Small Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 grow">
+                    {
+                        services.map((service) => (
+                            <div
+
+                                class="group bg-white p-8 text-center text-gray-900 relative overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-none flex flex-col items-center shadow-xl"
+                            >
+                                <!-- Glow Effect -->
+                                <div
+                                    class="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-brand-blue to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                >
+                                </div>
+                                <div class="mb-6 relative inline-block">
+                                    <div
+                                        class="absolute inset-0 bg-brand-blue blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-300 rounded-full"
+                                    >
+                                    </div>
+                                    <i
+                                        class={`text-5xl text-brand-blue relative z-10 ${service.icon}`}
+                                    ></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3 text-brand-blue">
+                                    {service.title}
+                                </h3>
+                                <p
+                                    class="text-gray-600 text-sm leading-relaxed mb-6 lg:mb-4 lg:line-clamp-3"
+                                >
+                                    {service.description}
+                                </p>
+
+                                <!-- CTA Button -->
+                                <div
+                                    class="mt-auto w-full pt-0 lg:pt-3 lg:border-t lg:border-gray-100"
+                                >
+                                    <a
+                                        href={service.link}
+                                        class="inline-flex items-center text-brand-blue font-bold hover:text-brand-yellow transition-colors text-sm lg:text-xs lg:uppercase lg:tracking-wider"
+                                    >
+                                        <span>Learn More</span>
+                                    <i class="ri-arrow-right-line ml-2 lg:ml-1"
+                                    ></i>
+                                    </a>
+                                </div>
+                            </div>
+                        ))
+                    }   
+                </div>
+            </div>
+
+            <!-- Right Column: Tall Card 3 -->
+            <div class="lg:col-span-4 h-full">
+                <!-- Card 3: Visa Consultation (Responsive: Normal on Mobile, Fancy on Desktop) -->
+                <div class="h-full relative group">
+                    <!-- Background Image (Hidden on Mobile, Visible on Desktop) -->
+                    <Image
+                        src={documentsImg}
+                        alt="Visa Documents"
+                        class="hidden lg:block absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        widths={[640, 1024, 1920]}
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                    <div class="hidden lg:block absolute inset-0 bg-black/10">
+                    </div>
+
+                    <!-- Card Content Wrapper -->
+                    <div
+                        class="relative z-10 h-full flex flex-col justify-start p-0 lg:p-6 md:p-8"
+                    >
+                        <div
+                            class="bg-white text-center text-gray-900 relative overflow-hidden transition-all duration-300
+                                                p-8 lg:p-6
+                                                hover:-translate-y-2 lg:hover:-translate-y-1
+                                                shadow-xl hover:shadow-2xl
+                                                border-none
+                                                flex flex-col items-center"
+                        >
+                            <!-- Glow Effect -->
+                            <div
+                                class="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-brand-blue to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            >
+                            </div>
+
+                            <div class="mb-6 lg:mb-3 relative inline-block">
+                                <div
+                                    class="absolute inset-0 bg-brand-blue blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-300 rounded-full"
+                                >
+                                </div>
+                                <i
+                                    class="ri-passport-line text-5xl lg:text-4xl text-brand-blue relative z-10"
+                                ></i>
+                            </div>
+
+                            <h3 class="text-xl font-bold mb-3 text-brand-blue">
+                                Visa Document Consultation
+                            </h3>
+                            <p
+                                class="text-gray-600 text-sm leading-relaxed mb-6 lg:mb-4 lg:line-clamp-3"
+                            >
+                                Expert guidance on visa requirements to ensure a
+                                smooth entry to your dream destination.
+                            </p>
+
+                            <!-- CTA Button -->
+                            <div
+                                class="mt-auto w-full pt-0 lg:pt-3 lg:border-t lg:border-gray-100"
+                            >
+                                <a
+                                    href="documents/"
+                                    class="inline-flex items-center text-brand-blue font-bold hover:text-brand-yellow transition-colors text-sm lg:text-xs lg:uppercase lg:tracking-wider"
+                                >
+                                    <span>Learn More</span>
+                                    <i class="ri-arrow-right-line ml-2 lg:ml-1"
+                                    ></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,223 @@
+---
+import { Image } from "astro:assets";
+import dhavalImg from "../assets/dhaval limbani.png";
+import sriImg from "../assets/Sri.png";
+import habibImg from "../assets/Habib Oriolowo.png";
+import omarImg from "../assets/Omar Saig.png";
+
+const testimonials = [
+    {
+        name: "Dhaval Limbani",
+        image: dhavalImg,
+        review: "Excellent service from David. He handled my Belgium visa process smoothly and professionally. Thanks to his guidance and support, my visa was approved without any issues.",
+    },
+    {
+        name: "Sri",
+        image: sriImg,
+        review: "I applied for a Belgium Schengen visa through Trip2Go, and the service was very good. Michael supported me throughout the entire process... my family and I received our visa without any issues.",
+    },
+    {
+        name: "Malini Sophia",
+        initials: "MS",
+        review: "Excellent service and they helped with all documentation verification too. Keep up the good service and a special shout out to David. Thank you 🙏🏻",
+    },
+    {
+        name: "Sameer Gurung",
+        initials: "SG",
+        review: "Approached David to apply for Schengen visa. Managed to steer me around with step by step guide. Results- visa approved. Highly recommended to all.",
+    },
+    {
+        name: "Habib Oriolowo",
+        image: habibImg,
+        review: "Jiya was really wonderful, did very well, relatively smooth process, and got my visa.",
+    },
+    {
+        name: "Adam Smith",
+        initials: "AS",
+        review: "wow , what a wonderful work, they people do. i enjoyed my last week in Athens and Tallinn, what a memorable time for me. Thanks my Agent Sam.",
+    },
+    {
+        name: "Omar Saig",
+        image: omarImg,
+        review: "Im a UK GP... I dealt with Michael and he explained every step... I submitted the passport and received the visa 14 days later. Professional and helpful.",
+    },
+];
+---
+
+<!-- Testimonials Section -->
+<section class="py-16 md:py-24 bg-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h2
+                class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-6 drop-shadow-sm"
+            >
+                What Our Happy Travelers<br /> Are Saying
+            </h2>
+            <div
+                class="flex justify-center items-center space-x-2 text-brand-yellow mb-4"
+            >
+                <i class="ri-star-fill text-2xl"></i>
+                <i class="ri-star-fill text-2xl"></i>
+                <i class="ri-star-fill text-2xl"></i>
+                <i class="ri-star-fill text-2xl"></i>
+                <i class="ri-star-fill text-2xl"></i>
+            </div>
+            <p class="text-gray-600 font-medium">
+                Rated Excellent on <span
+                    class="font-bold text-[#00b67a] items-center justify-center inline-flex gap-1"
+                    ><i class="ri-star-smile-fill"></i> Trustpilot</span
+                >
+            </p>
+        </div>
+
+        <!-- Scroll Progress Bar -->
+        <div
+            class="w-full h-2 bg-gray-200 rounded-full mb-8 overflow-hidden max-w-3xl mx-auto"
+        >
+            <div
+                id="scroll-progress"
+                class="h-full bg-brand-blue w-0 transition-all duration-100 ease-out"
+            >
+            </div>
+        </div>
+
+        <!-- Carousel Container -->
+        <div class="relative group px-4">
+            <!-- Navigation Buttons -->
+            <button
+                id="prev-btn"
+                class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-6 z-10 w-12 h-12 bg-white rounded-full shadow-xl items-center justify-center text-brand-blue hover:text-brand-yellow hover:scale-110 transition-all duration-300 border border-gray-100 hidden md:flex"
+            >
+                <i class="ri-arrow-left-s-line text-3xl"></i>
+            </button>
+            <button
+                id="next-btn"
+                class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-6 z-10 w-12 h-12 bg-white rounded-full shadow-xl items-center justify-center text-brand-blue hover:text-brand-yellow hover:scale-110 transition-all duration-300 border border-gray-100 hidden md:flex"
+            >
+                <i class="ri-arrow-right-s-line text-3xl"></i>
+            </button>
+
+            <!-- Scrollable Area -->
+            <div
+                id="testimonial-carousel"
+                class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scrollbar-hide scroll-smooth"
+                style="scrollbar-width: none; -ms-overflow-style: none;"
+            >
+                {
+                    testimonials.map((testimonial) => (
+                        <div class="min-w-[300px] md:min-w-[350px] bg-brand-blue p-8 rounded-none shadow-xl border-t-4 border-brand-yellow snap-center flex flex-col transform transition-all hover:-translate-y-1">
+                            <div class="mb-4 text-brand-yellow text-lg">
+                                <i class="ri-double-quotes-l" />
+                            </div>
+                            <p class="text-blue-100 italic mb-6 grow">
+                                "{testimonial.review}"
+                            </p>
+                            <div class="flex items-center mt-auto">
+                                {testimonial.image ? (
+                                    <Image
+                                        src={testimonial.image}
+                                        alt={testimonial.name}
+                                        class="w-12 h-12 rounded-full object-cover border-2 border-brand-yellow mr-3"
+                                        widths={[48, 96]}
+                                        sizes="48px"
+                                    />
+                                ) : (
+                                    <div class="w-12 h-12 rounded-full bg-white text-brand-blue flex items-center justify-center font-bold mr-3 border-2 border-brand-yellow">
+                                        {testimonial.initials}
+                                    </div>
+                                )}
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">
+                                        {testimonial.name}
+                                    </h4>
+                                    <div class="flex text-brand-yellow text-xs">
+                                        <>
+                                            <i class="ri-star-fill" />
+                                            <i class="ri-star-fill" />
+                                            <i class="ri-star-fill" />
+                                            <i class="ri-star-fill" />
+                                            <i class="ri-star-fill" />
+                                        </>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <!-- Trustpilot Button -->
+            <div class="text-center mt-12">
+                <a
+                    href="https://www.trustpilot.com/review/trip2go.co.uk"
+                    target="_blank"
+                    class="inline-flex items-center bg-[#00b67a] text-white font-bold py-3 px-8 rounded-none hover:bg-[#009c69] transition-colors shadow-lg group"
+                >
+                    <span>Read more on Trustpilot</span>
+                    <i
+                        class="ri-external-link-line ml-2 group-hover:translate-x-1 transition-transform"
+                    ></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const container = document.getElementById("testimonial-carousel");
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+        const progressBar = document.getElementById("scroll-progress");
+
+        function updateProgressBar() {
+            if (container && progressBar) {
+                const scrollPercentage =
+                    (container.scrollLeft /
+                        (container.scrollWidth - container.clientWidth)) *
+                    100;
+                progressBar.style.width = `${scrollPercentage}%`;
+            }
+        }
+
+        function scrollCarousel(direction: string) {
+            const scrollAmount = 800; // Adjust scroll amount as needed
+            if (container) {
+                if (direction === "left") {
+                    container.scrollBy({
+                        left: -scrollAmount,
+                        behavior: "smooth",
+                    });
+                } else {
+                    container.scrollBy({
+                        left: scrollAmount,
+                        behavior: "smooth",
+                    });
+                }
+            }
+        }
+
+        if (container) {
+            container.addEventListener("scroll", updateProgressBar);
+            // Initial update
+            updateProgressBar();
+            // Update on resize
+            window.addEventListener("resize", updateProgressBar);
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener("click", () => {
+                scrollCarousel("left");
+                // Small timeout to update bar after smooth scroll starts/during
+                setTimeout(updateProgressBar, 100);
+            });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+                scrollCarousel("right");
+                setTimeout(updateProgressBar, 100);
+            });
+        }
+    });
+</script>

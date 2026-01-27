@@ -1,0 +1,136 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import heroImage from "../assets/hero3.jpg";
+import { Image } from "astro:assets";
+import logo from "../assets/logo.png";
+
+const stats = [
+    {
+        icon: "ri-user-smile-line",
+        number: "5000+",
+        label: "Happy Travelers",
+    },
+    {
+        icon: "ri-map-2-line",
+        number: "100+",
+        label: "Destinations Covered",
+    },
+    {
+        icon: "ri-thumb-up-line",
+        number: "99%",
+        label: "Success Rate",
+    },
+];
+---
+
+<Layout>
+    <header
+        class="relative h-[60vh] flex items-center justify-center overflow-hidden bg-brand-blue"
+    >
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0 opacity-20">
+            <div
+                class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"
+            >
+            </div>
+        </div>
+
+        <!-- Header Content -->
+        <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 mt-16">
+            <h1
+                class="text-white text-5xl md:text-7xl font-extrabold tracking-tight mb-4 drop-shadow-xl"
+            >
+                About Trip2Go
+            </h1>
+            <p
+                class="text-blue-100 text-lg md:text-xl font-medium max-w-2xl mx-auto drop-shadow-md"
+            >
+                Crafting Unforgettable Journeys Since 2024.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="bg-white">
+        <!-- Story Section -->
+        <section class="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+            <div
+                class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+            >
+                <div>
+                    <!-- Decorative Line -->
+                    <div class="w-20 h-1 bg-brand-yellow mb-6"></div>
+                    <h2
+                        class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-6 font-display"
+                    >
+                        We are more than just a travel agency.
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        At Trip2Go, we believe that travel is the only thing you
+                        buy that makes you richer. Founded on a passion for
+                        exploration and a commitment to excellence, we have
+                        grown into a trusted partner for travelers worldwide.
+                    </p>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        Our mission is simple: to remove the stress of planning
+                        so you can focus on the joy of discovery. Whether you
+                        are seeking a serene escape, an adrenaline-fueled
+                        adventure, or a cultural immersion, our team of
+                        dedicated experts is here to make your dream trip a
+                        reality. From intricate visa procedures to securing the
+                        best seats on the plane, we handle every detail with
+                        precision and care.
+                    </p>
+                </div>
+                <div class="relative">
+                    <div
+                        class="absolute -top-4 -left-4 w-full h-full bg-brand-blue rounded-none opacity-10"
+                    >
+                    </div>
+                    <Image
+                        src={logo}
+                        alt="Trip2Go Logo"
+                        class="relative z-10 w-full h-auto shadow-2xl bg-brand-yellow hover:scale-[1.02] transition-transform duration-500"
+                        widths={[400, 600, 800]}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats / Why Choose Us -->
+        <section class="bg-brand-blue py-16 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    {
+                        stats.map((stat) => (
+                            <div class="p-6">
+                                <i
+                                    class={`${stat.icon} text-5xl text-brand-yellow mb-4`}
+                                />
+                                <h3 class="text-4xl font-bold mb-2">
+                                    {stat.number}
+                                </h3>
+                                <p class="text-blue-200">{stat.label}</p>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-20 text-center px-4">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">
+                Ready to start your adventure?
+            </h2>
+            <a
+                href="/contact"
+                class="bg-brand-yellow text-gray-900 font-bold py-3 px-10 text-lg rounded-none hover:bg-gray-900 hover:text-white transition-all duration-300 shadow-xl inline-block"
+            >
+                Contact Us Today
+            </a>
+        </section>
+    </main>
+</Layout>

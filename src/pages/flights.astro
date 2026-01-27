@@ -1,0 +1,50 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import heroImage from "../assets/flights.jpg";
+---
+
+<Layout>
+    <Hero
+        PageName="flights"
+        image={heroImage}
+        title="Flights"
+        subtitle="Budget friendly and Hassle free flights."
+    />
+    <main class="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
+                We Find, You Book
+            </h2>
+            <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                We believe in full transparency. We don't book flights
+                ourselves—instead, we use our expertise to find the cheapest and
+                most hassle-free flights that meet your exact requirements. We
+                provide you with the direct booking links so you stay in
+                control.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 text-left mb-12">
+                <div class="bg-gray-50 p-6 border-l-4 border-brand-yellow">
+                    <h3 class="text-xl font-bold mb-2">Expert Search</h3>
+                    <p class="text-gray-600">
+                        We search multiple platforms and use advanced tools to
+                        find fares not easily visible to the public.
+                    </p>
+                </div>
+                <div class="bg-gray-50 p-6 border-l-4 border-brand-yellow">
+                    <h3 class="text-xl font-bold mb-2">Tailored Options</h3>
+                    <p class="text-gray-600">
+                        Short layovers? Specific airlines? We customize the
+                        search to your preferences.
+                    </p>
+                </div>
+            </div>
+            <a
+                href="/contact"
+                class="bg-brand-yellow text-gray-900 font-bold py-3 px-10 text-lg rounded-none hover:bg-gray-900 hover:text-white transition-all duration-300 shadow-xl inline-block"
+            >
+                Request Flight Search
+            </a>
+        </div>
+    </main>
+</Layout>

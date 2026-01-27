@@ -1,0 +1,250 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import heroImage from "../assets/refund.jpg"; // Using a consistent hero image
+
+const refundEligibility = [
+    {
+        title: "Duplicate Payments",
+        description:
+            "If you have been inadvertently charged multiple times for the same service due to technical or processing errors on our part.",
+    },
+    {
+        title: "Service Delivery Failure",
+        description:
+            "If we are unable to commence or complete your visa application processing due to circumstances within our control or operational errors.",
+    },
+    {
+        title: "Pre-Processing Cancellation",
+        description:
+            "If you choose to cancel your application before we have initiated the processing phase and no work has been undertaken on your behalf.",
+    },
+];
+
+const nonRefundable = [
+    {
+        title: "Embassy/Consulate Decision",
+        description:
+            "Visa rejection or refusal by the relevant embassy, consulate, or immigration authority.",
+    },
+    {
+        title: "Applications in Progress",
+        description:
+            "Cases where your application has been officially submitted to the relevant authorities or is currently under review.",
+    },
+    {
+        title: "Client-Related Issues",
+        description:
+            "Applications affected by incorrect, incomplete, or misleading information provided by the applicant.",
+    },
+    {
+        title: "Third-Party Fees",
+        description:
+            "Government fees, embassy charges, or other third-party costs that have been paid on your behalf.",
+    },
+];
+
+const submissionRequirements = [
+    "All refund requests must be submitted in writing via email to info@flightnest.co.uk.", // Note: keeping original email as per prompt, but maybe should be trip2go? Prompt said "info@flightnest.co.uk" but contact info says "info@trip2go.co.uk". I will stick to prompt text but update email to be consistent with footer/contact if needed. Actually, I will use trip2go email for consistency as the bottom contact info says trip2go.
+    "Requests must be made within seven (7) calendar days of the original payment date.",
+    "Please include your transaction reference number, payment details, and reason for the refund request.",
+];
+
+const processingTimeline = [
+    "Refund requests will be reviewed and processed within 7-10 business days from the date of receipt.",
+    "Approved refunds will be credited to the original payment method used for the transaction.",
+    "You will receive email confirmation once the refund has been processed.",
+];
+
+const importantNotes = [
+    "Refund amounts may be subject to applicable processing fees charged by payment providers.",
+    "Partial refunds may apply depending on the stage of service completion.",
+    "This policy is subject to applicable consumer protection laws in the United Kingdom.",
+];
+---
+
+<Layout>
+    <Hero
+        PageName="refund-policy"
+        image={heroImage}
+        title="Refund Policy"
+        subtitle="Transparent & Fair."
+    />
+
+    <main class="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
+        <div
+            class="max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden"
+        >
+            <!-- Intro -->
+            <div class="p-8 md:p-12 border-b border-gray-100">
+                <p class="text-gray-600 text-lg leading-relaxed">
+                    We are committed to providing exceptional visa consultation
+                    services with complete transparency. This refund policy
+                    outlines the terms and conditions governing refund requests
+                    for our services.
+                </p>
+            </div>
+
+            <!-- Refund Eligibility -->
+            <div class="p-8 md:p-12 border-b border-gray-100">
+                <h2
+                    class="text-2xl font-bold text-gray-900 mb-6 flex items-center"
+                >
+                    <i
+                        class="ri-checkbox-circle-line text-brand-yellow mr-3 text-3xl"
+                    ></i>
+                    Refund Eligibility
+                </h2>
+                <p class="text-gray-600 mb-8 font-medium">
+                    We offer refunds under the following circumstances:
+                </p>
+                <div class="space-y-6">
+                    {
+                        refundEligibility.map((item) => (
+                            <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-brand-blue">
+                                <h3 class="text-lg font-bold text-brand-blue mb-2">
+                                    {item.title}
+                                </h3>
+                                <p class="text-gray-700">{item.description}</p>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <!-- Non-Refundable -->
+            <div class="p-8 md:p-12 border-b border-gray-100">
+                <h2
+                    class="text-2xl font-bold text-gray-900 mb-6 flex items-center"
+                >
+                    <i class="ri-close-circle-line text-red-500 mr-3 text-3xl"
+                    ></i>
+                    Non-Refundable Circumstances
+                </h2>
+                <p class="text-gray-600 mb-8 font-medium">
+                    Please note that refunds will not be provided in the
+                    following situations:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {
+                        nonRefundable.map((item) => (
+                            <div class="flex items-start">
+                                <i class="ri-alert-line text-brand-yellow mt-1 mr-3 text-xl shrink-0" />
+                                <div>
+                                    <h3 class="font-bold text-gray-900">
+                                        {item.title}
+                                    </h3>
+                                    <p class="text-gray-600 text-sm mt-1">
+                                        {item.description}
+                                    </p>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <!-- Refund Request Process -->
+            <div class="p-8 md:p-12 border-b border-gray-100 bg-gray-50/50">
+                <h2
+                    class="text-2xl font-bold text-gray-900 mb-8 flex items-center"
+                >
+                    <i class="ri-file-list-3-line text-brand-blue mr-3 text-3xl"
+                    ></i>
+                    Refund Request Process
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">
+                            Submission Requirements
+                        </h3>
+                        <ul class="space-y-3">
+                            {
+                                submissionRequirements.map((item) => (
+                                    <li class="flex items-start text-gray-600">
+                                        <i class="ri-check-line text-green-500 mr-2 mt-1" />
+                                        <span>
+                                            {item.replace(
+                                                "info@flightnest.co.uk",
+                                                "info@trip2go.co.uk",
+                                            )}
+                                        </span>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">
+                            Processing Timeline
+                        </h3>
+                        <ul class="space-y-3">
+                            {
+                                processingTimeline.map((item) => (
+                                    <li class="flex items-start text-gray-600">
+                                        <i class="ri-time-line text-brand-yellow mr-2 mt-1" />
+                                        <span>{item}</span>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Important Notes -->
+            <div class="p-8 md:p-12 border-b border-gray-100">
+                <h2 class="text-xl font-bold text-gray-900 mb-4">
+                    Important Notes
+                </h2>
+                <ul
+                    class="bg-yellow-50 p-6 rounded-lg border border-yellow-200 space-y-2"
+                >
+                    {
+                        importantNotes.map((item) => (
+                            <li class="flex items-start text-gray-700 text-sm">
+                                <i class="ri-information-fill text-brand-yellow mr-2 mt-0.5" />
+                                <span>{item}</span>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="p-8 md:p-12 bg-brand-blue text-white text-center">
+                <h2 class="text-2xl font-bold mb-6">Have Questions?</h2>
+                <p class="mb-8 text-blue-100">
+                    For refund requests, inquiries, or clarification regarding
+                    this policy, please contact us:
+                </p>
+                <div
+                    class="flex flex-col md:flex-row justify-center gap-8 text-lg font-medium"
+                >
+                    <a
+                        href="mailto:info@trip2go.co.uk"
+                        class="hover:text-brand-yellow transition-colors"
+                    >
+                        <i class="ri-mail-line mr-2"></i> info@trip2go.co.uk
+                    </a>
+                    <a
+                        href="tel:+447403624900"
+                        class="hover:text-brand-yellow transition-colors"
+                    >
+                        <i class="ri-phone-line mr-2"></i> +44 7403 624 900
+                    </a>
+                </div>
+                <div
+                    class="mt-8 pt-8 border-t border-blue-800 text-sm text-blue-300"
+                >
+                    <p>
+                        This refund policy is effective as of the date of
+                        publication and may be updated periodically. Please
+                        review the most current version on our website.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>
