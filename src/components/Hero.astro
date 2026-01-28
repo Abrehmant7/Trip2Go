@@ -1,66 +1,134 @@
 ---
 import { Image } from "astro:assets";
+import hero1 from "../assets/hero.jpg";
+import hero2 from "../assets/hero2.jpg";
+import hero3 from "../assets/hero3.jpg";
+import hero4 from "../assets/hero4.jpg";
 
-import type { ImageMetadata } from "astro";
-
-interface props {
+interface Props {
     PageName: string;
-    image: ImageMetadata;
-    width?: number;
-    height?: number;
+    image?: ImageMetadata;
     title?: string;
     subtitle?: string;
 }
 
-const {
-    PageName,
-    image,
-    width = 1920,
-    height = 1080,
-    title,
-    subtitle,
-} = Astro.props as props;
-// relative h-[60vh] flex items-center justify-center overflow-hidden
+const { PageName, image = hero1, title, subtitle } = Astro.props as Props;
+
+const slides = [
+    {
+        image: hero1,
+        title: "DISCOVER PACKAGES",
+        subtitle: "Curated experiences for every traveler",
+    },
+    {
+        image: hero2,
+        title: "HASSLE-FREE  DOCUMENTS",
+        subtitle: "We handle the paperwork, you enjoy the trip",
+    },
+    {
+        image: hero3,
+        title: "PREMIUM FLIGHTS",
+        subtitle: "Fly in comfort and style",
+    },
+    {
+        image: hero4,
+        title: "Trip2Go",
+        subtitle: "Your Guide to the World",
+    },
+];
+
+const searchOptions = [
+    { icon: "ri-suitcase-line", label: "Packages" },
+    { icon: "ri-file-list-3-line", label: "Documents" },
+    { icon: "ri-plane-line", label: "Flights" },
+    { icon: "ri-hotel-line", label: "Hotels" },
+];
 ---
 
-<!-- Hero Section -->
-<header
-    class={`relative flex items-center justify-center overflow-hidden ${PageName == "index" ? "h-[80vh] md:h-screen min-h-[500px] md:min-h-[600px]" : "h-[60vh]"}`}
->
-    <!-- Background Image -->
-
-    <div class="absolute inset-0 z-0">
-        <Image
-            class="w-full h-full object-cover"
-            src={image}
-            widths={[640, 1024, 1920]}
-            sizes="(max-width: 640px) 100vw, 100vw"
-            alt="Beautiful Landscape"
-        />
-        <!-- Overlay Gradient for text readability -->
+{
+    PageName === "index" ? (
         <div
-            class="absolute inset-0 bg-linear-to-b from-black/50 via-transparent to-black/30"
+            id="hero-carousel"
+            class="relative w-full h-[80vh] md:h-screen overflow-hidden bg-black select-none"
         >
-        </div>
-    </div>
+            {slides.map((slide, index) => (
+                <div
+                    class="slide absolute inset-0 w-full h-full will-change-transform"
+                    data-index={index}
+                >
+                    <Image
+                        src={slide.image}
+                        alt={slide.title || "Travel with Trip2Go"}
+                        class="w-full h-full object-cover"
+                        widths={[360, 480, 640, 768, 1024, 1280, 1600, 1920]}
+                        quality={80}
+                        sizes="100vw"
+                        loading={index === 0 ? "eager" : "lazy"}
+                    />
+                    <div class="absolute inset-0 bg-black/40" />
 
-    <!-- Hero Content -->
-    <!-- Hero Content -->
-    {
-        PageName === "index" ? (
-            <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 mt-8 md:mt-16">
-                <span
-                    class="block text-white text-base sm:text-2xl font-semibold tracking-[0.2em] mb-2 sm:mb-4 drop-shadow-md animate-fade-in-up uppercase"
-                    >Your Guide to the World</span
-                >
-                <h1
-                    class="text-white text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tight mb-6 drop-shadow-xl"
-                >
-                    AUSTRALIA
-                </h1>
-                <!-- Optional CTA or Subtext can go here -->
+                    {/* Text Container */}
+                    <div class="slide-text-container absolute z-20 inset-0 flex flex-col justify-center items-center text-center text-white px-4">
+                        <h1 class="slide-title text-4xl md:text-7xl font-extrabold tracking-tight mb-4 drop-shadow-xl translate-y-12 opacity-0">
+                            {slide.title}
+                        </h1>
+                        <p class="slide-subtitle text-lg md:text-2xl font-light tracking-wide max-w-2xl translate-y-12 opacity-0">
+                            {slide.subtitle}
+                        </p>
+                    </div>
+
+                    {/* Search Card (Only on last slide) */}
+                    {index === slides.length - 1 && (
+                        <div
+                            id="search-card"
+                            class="absolute z-30 inset-0 flex items-center justify-center opacity-0 pointer-events-none translate-y-8"
+                        >
+                            <div class="bg-white p-3 md:p-4 md:bg-white/95 md:backdrop-blur-xl shadow-lg md:shadow-2xl flex flex-col md:flex-row items-center gap-2 md:gap-4 max-w-[95vw] md:max-w-5xl mx-4">
+                                {/* Options */}
+                                <div class="flex flex-wrap md:flex-nowrap justify-center gap-2 bg-gray-100/50 p-1 ">
+                                    {searchOptions.map((opt, i) => (
+                                        <button
+                                            class={`option-btn px-4 py-2 md:px-6 md:py-3  font-bold text-sm md:text-base transition-all duration-300 flex items-center gap-2
+                                            ${i === 0 ? "bg-white text-brand-blue shadow-sm" : "text-gray-600 hover:bg-white/50 hover:text-gray-900"}`}
+                                            data-index={i}
+                                        >
+                                            <i class={opt.icon} />
+                                            {opt.label}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                {/* Divider (Mobile Hidden) */}
+                                <div class="hidden md:block w-px h-10 bg-gray-200" />
+
+                                {/* Search Button */}
+                                <button
+                                    id="hero-search-btn"
+                                    class="w-full md:w-auto bg-brand-yellow text-gray-900 px-8 py-3 font-extrabold text-sm md:text-base hover:bg-yellow-400 hover:-translate-y-0.5 transition-all shadow-lg shadow-yellow-400/20 flex items-center justify-center gap-2 whitespace-nowrap"
+                                >
+                                    <i class="ri-search-line font-normal" />
+                                    Search
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            ))}
+        </div>
+    ) : (
+        <header class="relative flex items-center justify-center overflow-hidden h-[60vh]">
+            <div class="absolute inset-0 z-0">
+                <Image
+                    class="w-full h-full object-cover"
+                    src={image}
+                    widths={[360, 480, 640, 768, 1024, 1280, 1600, 1920]}
+                    quality={80}
+                    sizes="100vw"
+                    alt={title || "Trip2Go"}
+                />
+                <div class="absolute inset-0 bg-linear-to-b from-black/50 via-transparent to-black/30" />
             </div>
-        ) : (
+
             <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 mt-16">
                 <h1 class="text-white text-5xl md:text-7xl font-extrabold tracking-tight mb-4 drop-shadow-xl">
                     {title}
@@ -69,15 +137,284 @@ const {
                     {subtitle}
                 </p>
             </div>
-        )
-    }
+        </header>
+    )
+}
 
-    <!-- Scroll Down Indicator (Optional but nice) -->
-    <div
-        class="absolute bottom-6 md:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer"
-    >
-        <i
-            class="ri-arrow-down-line text-white text-3xl md:text-4xl drop-shadow-md"
-        ></i>
-    </div>
-</header>
+<script>
+    import { gsap } from "gsap";
+
+    let heroAnimationPlayed = false;
+
+    document.addEventListener("astro:page-load", () => {
+        const container = document.getElementById("hero-carousel");
+
+        // If we are not on the homepage (no carousel), do nothing.
+        // But if we are navigating away, we keep the 'played' state true.
+        if (!container) return;
+
+        const slides = Array.from(container.querySelectorAll(".slide"));
+        const searchCard = document.getElementById("search-card");
+
+        // Setup Option Buttons
+        const optionBtns = document.querySelectorAll(".option-btn");
+        let selectedOptionIndex = 0; // Default to first option (Packages)
+
+        optionBtns.forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+                optionBtns.forEach((b) => {
+                    b.classList.remove(
+                        "bg-white",
+                        "text-brand-blue",
+                        "shadow-sm",
+                    );
+                    b.classList.add("text-gray-600", "hover:bg-white/50");
+                });
+
+                const target = e.currentTarget as HTMLElement;
+                target.classList.remove("text-gray-600", "hover:bg-white/50");
+                target.classList.add(
+                    "bg-white",
+                    "text-brand-blue",
+                    "shadow-sm",
+                );
+
+                // Update selected index
+                selectedOptionIndex = parseInt(
+                    target.getAttribute("data-index") || "0",
+                );
+            });
+        });
+
+        // Search Button Logic
+        const searchBtn = document.getElementById("hero-search-btn");
+        if (searchBtn) {
+            searchBtn.addEventListener("click", () => {
+                switch (selectedOptionIndex) {
+                    case 0: // Packages
+                        const packagesSection =
+                            document.getElementById("packages");
+                        if (packagesSection) {
+                            packagesSection.scrollIntoView({
+                                behavior: "smooth",
+                            });
+                        }
+                        break;
+                    case 1: // Documents
+                        const documentsSection =
+                            document.getElementById("documents");
+                        if (documentsSection) {
+                            documentsSection.scrollIntoView({
+                                behavior: "smooth",
+                            });
+                        }
+                        break;
+                    case 2: // Flights
+                        window.location.href = "/flights";
+                        break;
+                    case 3: // Hotels
+                        window.location.href = "/hotels";
+                        break;
+                }
+            });
+        }
+
+        // Animate text in
+        const animateTextIn = (slide) => {
+            const texts = slide.querySelectorAll(
+                ".slide-title, .slide-subtitle",
+            );
+            if (!texts.length) return;
+
+            gsap.fromTo(
+                texts,
+                { y: 50, autoAlpha: 0 },
+                {
+                    y: 0,
+                    autoAlpha: 1,
+                    duration: 0.6,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                },
+            );
+        };
+
+        // Animate text out
+        const animateTextOut = (slide, onComplete?) => {
+            const texts = slide.querySelectorAll(
+                ".slide-title, .slide-subtitle",
+            );
+            if (!texts.length) {
+                onComplete && onComplete();
+                return;
+            }
+
+            gsap.to(texts, {
+                y: -50,
+                autoAlpha: 0,
+                duration: 0.3,
+                ease: "power2.in",
+                onComplete,
+            });
+        };
+
+        // Initial state
+        gsap.set(slides, { autoAlpha: 1, xPercent: 100, zIndex: 0 });
+        gsap.set(slides[0], { xPercent: 0, zIndex: 10 });
+        animateTextIn(slides[0]);
+
+        const TRANSITION_DURATION = 1;
+        const STAY_DURATION = 1500;
+
+        const timeline = gsap.timeline({ repeat: 0 });
+
+        // Horizontal transition
+        const transitionHorizontal = (fromIndex: number, toIndex: number) => {
+            animateTextOut(slides[fromIndex]);
+            gsap.set(slides[toIndex], { xPercent: 100, zIndex: 20 });
+
+            gsap.to(slides[fromIndex], {
+                xPercent: -100,
+                duration: TRANSITION_DURATION,
+                ease: "power3.inOut",
+                force3D: true,
+            });
+
+            gsap.to(slides[toIndex], {
+                xPercent: 0,
+                duration: TRANSITION_DURATION,
+                ease: "power3.inOut",
+                force3D: true,
+                onComplete: () => {
+                    gsap.set(slides[fromIndex], { zIndex: 0 });
+                    gsap.set(slides[toIndex], { zIndex: 10 });
+                    animateTextIn(slides[toIndex]);
+                },
+            });
+        };
+
+        // Vertical transition (final slide)
+        // Vertical transition (final slide)
+        const transitionVerticalFinal = (
+            fromIndex: number,
+            toIndex: number,
+        ) => {
+            const isMobile = window.matchMedia("(max-width: 768px)").matches;
+            animateTextOut(slides[fromIndex]);
+
+            const onComplete = () => {
+                gsap.set(slides[fromIndex], { zIndex: 0 });
+                gsap.set(slides[toIndex], { zIndex: 10 });
+
+                animateTextIn(slides[toIndex]);
+
+                // Delay then show search card
+                gsap.delayedCall(2.2, () => {
+                    animateTextOut(slides[toIndex], () => {
+                        if (searchCard) {
+                            searchCard.style.pointerEvents = "auto";
+                            gsap.to(searchCard, {
+                                autoAlpha: 1,
+                                y: 0,
+                                duration: 0.8,
+                                ease: "back.out(1.2)",
+                            });
+                        }
+                    });
+                });
+            };
+
+            if (isMobile) {
+                gsap.set(slides[toIndex], {
+                    xPercent: 100,
+                    yPercent: 0,
+                    zIndex: 20,
+                });
+
+                gsap.to(slides[fromIndex], {
+                    xPercent: -100,
+                    duration: TRANSITION_DURATION,
+                    ease: "power3.inOut",
+                    force3D: true,
+                });
+
+                gsap.to(slides[toIndex], {
+                    xPercent: 0,
+                    duration: TRANSITION_DURATION,
+                    ease: "power3.inOut",
+                    force3D: true,
+                    onComplete,
+                });
+            } else {
+                gsap.set(slides[toIndex], {
+                    xPercent: 0,
+                    yPercent: 100,
+                    zIndex: 20,
+                });
+
+                gsap.to(slides[fromIndex], {
+                    yPercent: -100,
+                    duration: TRANSITION_DURATION,
+                    ease: "power3.inOut",
+                    force3D: true,
+                });
+
+                gsap.to(slides[toIndex], {
+                    yPercent: 0,
+                    duration: TRANSITION_DURATION,
+                    ease: "power3.inOut",
+                    force3D: true,
+                    onComplete,
+                });
+            }
+        };
+
+        if (!heroAnimationPlayed) {
+            // Sequence
+            timeline.add(
+                () => transitionHorizontal(0, 1),
+                "+=" + STAY_DURATION / 1000,
+            );
+            timeline.add(
+                () => transitionHorizontal(1, 2),
+                "+=" + (TRANSITION_DURATION + STAY_DURATION / 1000),
+            );
+            timeline.add(
+                () => transitionVerticalFinal(2, 3),
+                "+=" + (TRANSITION_DURATION + STAY_DURATION / 1000),
+            );
+
+            // Mark as played
+            heroAnimationPlayed = true;
+        } else {
+            // Jump to final state immediately
+            // Hide all slides
+            gsap.set(slides, { autoAlpha: 0, zIndex: 0 });
+            // Show last slide
+            const lastSlideIndex = slides.length - 1;
+            const lastSlide = slides[lastSlideIndex];
+
+            gsap.set(lastSlide, {
+                autoAlpha: 1,
+                xPercent: 0,
+                yPercent: 0,
+                zIndex: 10,
+            });
+
+            // Show text
+            const texts = lastSlide.querySelectorAll(
+                ".slide-title, .slide-subtitle",
+            );
+            gsap.set(texts, { y: 0, autoAlpha: 0 });
+
+            // Show search card immediately
+            if (searchCard) {
+                searchCard.style.pointerEvents = "auto";
+                gsap.set(searchCard, {
+                    autoAlpha: 1,
+                    y: 0,
+                });
+            }
+        }
+    });
+</script>

@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Nav from "../components/Navbar.astro";
+import FloatingContact from "../components/FloatingContact.astro";
 import Footer from "../components/Footer.astro";
 import { ClientRouter } from "astro:transitions";
 
@@ -33,6 +34,7 @@ const { title = "Trip2Go - Your Guide to the World" } = Astro.props;
     >
         <Nav />
         <slot />
+        <FloatingContact />
         <Footer />
     </body>
 </html>

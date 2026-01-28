@@ -1,0 +1,73 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import heroImage from "../assets/hero3.jpg";
+
+const sections = [
+    {
+        title: "Main Pages",
+        links: [
+            { href: "/", label: "Home" },
+            { href: "/about", label: "About Us" },
+            { href: "/blog", label: "Blog" },
+            { href: "/contact", label: "Contact Us" },
+            { href: "/faqs", label: "FAQs" },
+        ],
+    },
+    {
+        title: "Destinations & Services",
+        links: [
+            { href: "/destinations", label: "All Destinations" },
+            { href: "/packages", label: "Travel Packages" },
+            { href: "/flights", label: "Flight Booking" },
+            { href: "/hotels", label: "Hotel Booking" },
+            { href: "/documents", label: "Document Booking" },
+        ],
+    },
+    {
+        title: "Legal",
+        links: [
+            { href: "/privacy-policy", label: "Privacy Policy" },
+            { href: "/refund-policy", label: "Refund Policy" },
+        ],
+    },
+];
+---
+
+<Layout title="Sitemap - Trip2Go">
+    <Hero
+        PageName="sitemap"
+        title="Sitemap"
+        subtitle="Navigate through our website"
+        image={heroImage}
+    />
+
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                {
+                    sections.map((section) => (
+                        <div class="bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-100">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-6 border-b border-gray-200 pb-2">
+                                {section.title}
+                            </h2>
+                            <ul class="space-y-4">
+                                {section.links.map((link) => (
+                                    <li>
+                                        <a
+                                            href={link.href}
+                                            class="flex items-center text-gray-700 hover:text-brand-blue hover:translate-x-1 transition-all duration-300 font-medium"
+                                        >
+                                            <i class="ri-arrow-right-s-line mr-2 text-brand-yellow" />
+                                            {link.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+</Layout>

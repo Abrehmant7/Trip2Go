@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
+import Testimonials from "../components/Testimonials.astro";
 import heroImage from "../assets/hero3.jpg";
 import { Image } from "astro:assets";
 import logo from "../assets/logo.png";
@@ -92,7 +92,8 @@ const stats = [
                         src={logo}
                         alt="Trip2Go Logo"
                         class="relative z-10 w-full h-auto shadow-2xl bg-brand-yellow hover:scale-[1.02] transition-transform duration-500"
-                        widths={[400, 600, 800]}
+                        widths={[320, 400, 600, 800]}
+                        quality={80}
                         sizes="(max-width: 768px) 100vw, 50vw"
                     />
                 </div>
@@ -120,8 +121,9 @@ const stats = [
             </div>
         </section>
 
+        <Testimonials />
         <!-- CTA -->
-        <section class="py-20 text-center px-4">
+        <section class="pb-20 text-center px-4">
             <h2 class="text-3xl font-bold text-gray-900 mb-6">
                 Ready to start your adventure?
             </h2>

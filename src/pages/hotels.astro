@@ -1,0 +1,51 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import heroImage from "../assets/hotels.jpg";
+---
+
+<Layout>
+    <Hero
+        PageName="hotels"
+        image={heroImage}
+        title="Hotels"
+        subtitle="Stay in comfort and luxury."
+    />
+    <main class="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
+                Your Perfect Stay Awaits
+            </h2>
+            <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                We know that a great trip starts with a great place to stay.
+                Whether you're looking for a luxury resort, a boutique hotel, or
+                a budget-friendly option, we find the best accommodations that
+                suit your style and budget. We provide you with the best options
+                so you can relax and enjoy your trip.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 text-left mb-12">
+                <div class="bg-gray-50 p-6 border-l-4 border-brand-yellow">
+                    <h3 class="text-xl font-bold mb-2">Curated Selection</h3>
+                    <p class="text-gray-600">
+                        We hand-pick hotels based on quality, location, and
+                        guest reviews to ensure you have a comfortable stay.
+                    </p>
+                </div>
+                <div class="bg-gray-50 p-6 border-l-4 border-brand-yellow">
+                    <h3 class="text-xl font-bold mb-2">Best Rates</h3>
+                    <p class="text-gray-600">
+                        We compare prices across multiple platforms to get you
+                        the most competitive rates for your chosen
+                        accommodation.
+                    </p>
+                </div>
+            </div>
+            <a
+                href="/contact"
+                class="bg-brand-yellow text-gray-900 font-bold py-3 px-10 text-lg rounded-none hover:bg-gray-900 hover:text-white transition-all duration-300 shadow-xl inline-block"
+            >
+                Request Hotel Booking
+            </a>
+        </div>
+    </main>
+</Layout>

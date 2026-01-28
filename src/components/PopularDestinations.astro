@@ -30,7 +30,7 @@ const destinations = [
 ---
 
 <!-- Popular Destinations Section -->
-<section class="py-16 md:py-24 bg-white relative">
+<section id="packages" class="py-16 md:py-24 bg-white relative">
     <!-- Background Decoration (Optional) -->
     <div
         class="absolute inset-0 bg-[url('./assets/hero.jpg')] opacity-5 bg-cover bg-center bg-fixed"
@@ -61,7 +61,8 @@ const destinations = [
                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                 src={dest.image}
                                 alt={dest.name}
-                                widths={[640, 1024, 1280]}
+                                widths={[320, 480, 640, 960, 1280]}
+                                quality={80}
                                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                             />
                             <!-- Price Badge -->

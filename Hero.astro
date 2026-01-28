@@ -1,0 +1,245 @@
+---
+import { Image } from 'astro:assets';
+import hero1 from '../assets/images/hero-1.png';
+import hero2 from '../assets/images/hero-2.png';
+import hero3 from '../assets/images/hero-3.png';
+
+const slides = [
+  {
+    image: hero1,
+    title: "THE LONDON EYE",
+    location: "LONDON, UK",
+    subtitle: "Experience the city from new heights"
+  },
+  {
+    image: hero2,
+    title: "PARISIAN DREAMS",
+    location: "PARIS, FRANCE",
+    subtitle: "Wander through the streets of romance"
+  },
+  {
+    image: hero3,
+    title: "FLIGHT NEST",
+    location: "GLOBAL TRAVEL",
+    subtitle: "Your journey begins here"
+  }
+];
+---
+
+<div id="hero-container" class="relative w-full h-screen overflow-hidden bg-black cursor-pointer group select-none">
+  {slides.map((slide, index) => (
+    <div 
+      class="slide absolute inset-0 w-full h-full will-change-transform"
+      data-index={index}
+    >
+      <div class="absolute inset-0 bg-black/30 z-10 pointer-events-none"></div>
+      <Image 
+        src={slide.image} 
+        alt={slide.title}
+        class="w-full h-full object-cover"
+        width={1920}
+        height={1080}
+        widths={[640, 1024, 1280, 1920]}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
+        loading="eager"
+      />
+      
+      <div class="absolute z-20 px-8 md:px-16 flex flex-col text-white pointer-events-none overflow-hidden inset-0 justify-center items-center text-center md:inset-x-0 md:top-auto md:bottom-24 md:h-auto md:justify-start md:items-start md:text-left">
+        <span class="slide-subtitle text-xs md:text-sm font-bold tracking-[0.2em] mb-2 block uppercase">
+          {slide.location}
+        </span>
+        <h1 class="slide-title text-5xl md:text-8xl font-black tracking-tighter mb-4 block">
+          {slide.title}
+        </h1>
+        <p class="slide-desc text-sm md:text-base font-light tracking-wide max-w-md block">
+          {slide.subtitle}
+        </p>
+      </div>
+
+      <!-- Navigation Indicator -->
+      <div class="absolute right-8 bottom-8 z-30 flex gap-2 pointer-events-none">
+         <span class="text-white/80 font-mono text-xs">{(index + 1).toString().padStart(2, '0')} / {slides.length.toString().padStart(2, '0')}</span>
+      </div>
+    </div>
+  ))}
+
+  <!-- Custom Cursor / Hint -->
+  <div class="absolute right-8 top-1/2 -translate-y-1/2 z-40 bg-white/10 backdrop-blur-md p-4 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none hidden md:block">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+      </svg>
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+
+  let currentIndex = 0;
+  let isAnimating = false;
+  let slides: HTMLElement[] = [];
+  let totalSlides = 0;
+  let ctx;
+  let slideInterval;
+
+  // Configuration
+  const DURATION = 1.2;
+  const EASE = "power3.inOut";
+  const AUTO_SLIDE_INTERVAL = 3000;
+
+  function init() {
+    const container = document.getElementById('hero-container');
+    if (!container) return;
+    
+    slides = Array.from(container.querySelectorAll('.slide')) as HTMLElement[];
+    totalSlides = slides.length;
+    
+    // Create a GSAP context for easy cleanup (good practice)
+    ctx = gsap.context(() => {
+        // Initial setup
+        gsap.set(slides, {
+            xPercent: (i) => (i === 0 ? 0 : 100),
+            zIndex: (i) => (i === 0 ? 10 : 0),
+            autoAlpha: 1,
+        });
+        
+        // Initial Text Animation
+        const activeText = getSlideElements(slides[0]);
+        animateTextIn(activeText, 0);
+    }, container);
+
+    startTimer();
+  }
+
+  function startTimer() {
+    stopTimer();
+    slideInterval = setInterval(nextSlide, AUTO_SLIDE_INTERVAL);
+  }
+
+  function stopTimer() {
+    if (slideInterval) clearInterval(slideInterval);
+  }
+
+  function handleManualNext() {
+    nextSlide();
+    startTimer(); // Reset timer on manual interaction
+  }
+
+  function getSlideElements(slide) {
+    return {
+      subtitle: slide.querySelector('.slide-subtitle'),
+      title: slide.querySelector('.slide-title'),
+      desc: slide.querySelector('.slide-desc')
+    };
+  }
+
+  function animateTextIn(elements, delay = 0) {
+  if (!elements.title) return;
+
+  gsap.killTweensOf([elements.subtitle, elements.title, elements.desc]);
+
+  gsap.fromTo(
+    [elements.subtitle, elements.title, elements.desc],
+    { y: 50, autoAlpha: 0 },
+    {
+      y: 0,
+      autoAlpha: 1,
+      duration: 1,
+      stagger: 0.1,
+      ease: "power4.out",
+      delay,
+    }
+  );
+}
+
+function animateTextOut(elements) {
+  if (!elements.title) return;
+
+  gsap.killTweensOf([elements.subtitle, elements.title, elements.desc]);
+
+  gsap.to([elements.subtitle, elements.title, elements.desc], {
+    y: -50,
+    autoAlpha: 0,
+    duration: 0.5,
+    stagger: 0.05,
+    ease: "power2.in",
+  });
+}
+
+
+function nextSlide() {
+  if (isAnimating) return;
+  isAnimating = true;
+
+  const nextIndex = (currentIndex + 1) % totalSlides;
+  const currentSlide = slides[currentIndex];
+  const nextSlideEl = slides[nextIndex];
+
+  const currentText = getSlideElements(currentSlide);
+  const nextText = getSlideElements(nextSlideEl);
+
+  // Prepare next slide BEFORE animation starts
+  gsap.set(nextSlideEl, {
+    xPercent: 100,
+    zIndex: 20,
+  });
+
+  animateTextOut(currentText);
+
+  const tl = gsap.timeline({
+    onComplete: () => {
+  slides.forEach((slide, i) => {
+    gsap.set(slide, {
+      zIndex: i === nextIndex ? 10 : 0,
+      xPercent: i === nextIndex ? 0 : 100,
+    });
+  });
+
+  currentIndex = nextIndex;
+  isAnimating = false;
+}
+
+  });
+
+  tl.to(currentSlide, {
+    xPercent: -25,
+    duration: DURATION,
+    ease: EASE,
+  }, 0)
+   .to(nextSlideEl, {
+    xPercent: 0,
+    duration: DURATION,
+    ease: EASE,
+   }, 0)
+   .add(() => animateTextIn(nextText), "-=0.4");
+}
+
+
+  // Initialize
+  // Wait for DOM
+  document.addEventListener('DOMContentLoaded', init); // Ensure DOM is ready, though usually fine in Astro script after body
+
+  // Event Listeners
+  const container = document.getElementById('hero-container');
+  container?.addEventListener('click', handleManualNext);
+  
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+      handleManualNext();
+    }
+  });
+
+  // Basic Touch Support
+  let touchStartX = 0;
+  container?.addEventListener('touchstart', (e) => {
+     touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  
+  container?.addEventListener('touchend', (e) => {
+    if (touchStartX - e.changedTouches[0].screenX > 50) handleManualNext();
+  }, { passive: true });
+
+  window.addEventListener('beforeunload', () => {
+  ctx?.revert();
+  stopTimer();
+});
+</script>

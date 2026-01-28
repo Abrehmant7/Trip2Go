@@ -119,7 +119,7 @@ const currentPath = Astro.url.pathname;
 
     <!-- Mobile Menu (White Background, absolute) -->
     <div
-        class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl"
+        class="block bg-white border-t border-gray-100 absolute w-full shadow-xl overflow-hidden max-h-0 transition-all duration-500 ease-in-out opacity-0"
         id="mobile-menu"
     >
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
@@ -151,7 +151,19 @@ const currentPath = Astro.url.pathname;
 
         if (btn && menu) {
             btn.addEventListener("click", () => {
-                menu.classList.toggle("hidden");
+                const isExpanded = btn.getAttribute("aria-expanded") === "true";
+
+                if (isExpanded) {
+                    menu.style.maxHeight = "0px";
+                    menu.classList.remove("opacity-100");
+                    menu.classList.add("opacity-0");
+                    btn.setAttribute("aria-expanded", "false");
+                } else {
+                    menu.style.maxHeight = menu.scrollHeight + "px";
+                    menu.classList.remove("opacity-0");
+                    menu.classList.add("opacity-100");
+                    btn.setAttribute("aria-expanded", "true");
+                }
             });
         }
     });

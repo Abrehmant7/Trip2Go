@@ -35,6 +35,10 @@ const image = imageLoader ? (await imageLoader()).default : undefined;
                 <Image
                     src={image}
                     alt={post.frontmatter.title}
+                    widths={[360, 480, 640, 1024, 1920]}
+                    quality={80}
+                    sizes="100vw"
+                    format="webp"
                     class="absolute inset-0 w-full h-full object-cover opacity-60"
                 />
             )
