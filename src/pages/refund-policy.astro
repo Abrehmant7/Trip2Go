@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import heroImage from "../assets/refund.jpg"; // Using a consistent hero image
+import { Icon } from "astro-icon/components";
 
 const refundEligibility = [
     {
@@ -90,9 +91,10 @@ const importantNotes = [
                 <h2
                     class="text-2xl font-bold text-gray-900 mb-6 flex items-center"
                 >
-                    <i
-                        class="ri-checkbox-circle-line text-brand-yellow mr-3 text-3xl"
-                    ></i>
+                    <Icon
+                        name="ri:checkbox-circle-line"
+                        class="text-brand-yellow mr-3 text-3xl"
+                    />
                     Refund Eligibility
                 </h2>
                 <p class="text-gray-600 mb-8 font-medium">
@@ -117,8 +119,10 @@ const importantNotes = [
                 <h2
                     class="text-2xl font-bold text-gray-900 mb-6 flex items-center"
                 >
-                    <i class="ri-close-circle-line text-red-500 mr-3 text-3xl"
-                    ></i>
+                    <Icon
+                        name="ri:close-circle-line"
+                        class="text-red-500 mr-3 text-3xl"
+                    />
                     Non-Refundable Circumstances
                 </h2>
                 <p class="text-gray-600 mb-8 font-medium">
@@ -129,7 +133,10 @@ const importantNotes = [
                     {
                         nonRefundable.map((item) => (
                             <div class="flex items-start">
-                                <i class="ri-alert-line text-brand-yellow mt-1 mr-3 text-xl shrink-0" />
+                                <Icon
+                                    name="ri:alert-line"
+                                    class="text-brand-yellow mt-1 mr-3 text-xl shrink-0"
+                                />
                                 <div>
                                     <h3 class="font-bold text-gray-900">
                                         {item.title}
@@ -149,8 +156,10 @@ const importantNotes = [
                 <h2
                     class="text-2xl font-bold text-gray-900 mb-8 flex items-center"
                 >
-                    <i class="ri-file-list-3-line text-brand-blue mr-3 text-3xl"
-                    ></i>
+                    <Icon
+                        name="ri:file-list-3-line"
+                        class="text-brand-blue mr-3 text-3xl"
+                    />
                     Refund Request Process
                 </h2>
 
@@ -163,7 +172,10 @@ const importantNotes = [
                             {
                                 submissionRequirements.map((item) => (
                                     <li class="flex items-start text-gray-600">
-                                        <i class="ri-check-line text-green-500 mr-2 mt-1" />
+                                        <Icon
+                                            name="ri:check-line"
+                                            class="text-green-500 mr-2 mt-1"
+                                        />
                                         <span>
                                             {item.replace(
                                                 "info@flightnest.co.uk",
@@ -183,7 +195,10 @@ const importantNotes = [
                             {
                                 processingTimeline.map((item) => (
                                     <li class="flex items-start text-gray-600">
-                                        <i class="ri-time-line text-brand-yellow mr-2 mt-1" />
+                                        <Icon
+                                            name="ri:time-line"
+                                            class="text-brand-yellow mr-2 mt-1"
+                                        />
                                         <span>{item}</span>
                                     </li>
                                 ))
@@ -204,7 +219,10 @@ const importantNotes = [
                     {
                         importantNotes.map((item) => (
                             <li class="flex items-start text-gray-700 text-sm">
-                                <i class="ri-information-fill text-brand-yellow mr-2 mt-0.5" />
+                                <Icon
+                                    name="ri:information-fill"
+                                    class="text-brand-yellow mr-2 mt-0.5"
+                                />
                                 <span>{item}</span>
                             </li>
                         ))
@@ -226,13 +244,13 @@ const importantNotes = [
                         href="mailto:info@trip2go.co.uk"
                         class="hover:text-brand-yellow transition-colors"
                     >
-                        <i class="ri-mail-line mr-2"></i> info@trip2go.co.uk
+                        <Icon name="ri:mail-line" class="mr-2" /> info@trip2go.co.uk
                     </a>
                     <a
                         href="tel:+441233538140"
                         class="hover:text-brand-yellow transition-colors"
                     >
-                        <i class="ri-phone-line mr-2"></i> +44 1233 538140
+                        <Icon name="ri:phone-line" class="mr-2" /> +44 1233 538140
                     </a>
                 </div>
                 <div

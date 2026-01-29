@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { Image } from "astro:assets";
 import logoNew from "../assets/logo-new.png";
+import { Icon } from "astro-icon/components";
 
 const leftLinks = [
     { href: "/", label: "Home" },
@@ -111,7 +112,7 @@ const currentPath = Astro.url.pathname;
                     aria-expanded="false"
                 >
                     <span class="sr-only">Open main menu</span>
-                    <i class="ri-menu-line text-3xl drop-shadow-md"></i>
+                    <Icon name="ri:menu-line" class="text-3xl drop-shadow-md" />
                 </button>
             </div>
         </div>

@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 const cards = [
     {
         title: "Complete Visa Check",
@@ -16,7 +17,7 @@ const cards = [
         title: "Risk-Free Travel Prep",
         description:
             "Beyond the visa, we prepare your post-approval documents clearly, so you breeze through immigration and travel without stress.",
-        icon: "ri-shield-check-line ",
+        icon: "ri-shield-check-line",
     },
 ];
 ---
@@ -40,10 +41,11 @@ const cards = [
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             {
                 cards.map((card) => (
-                    <div class="bg-white p-8 text-center rounded-none shadow-xl transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl group flex flex-col items-center">
+                    <div class="document-card bg-white p-8 text-center rounded-none shadow-xl transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl group flex flex-col items-center">
                         <div class="w-20 h-20 bg-blue-50 flex items-center justify-center rounded-full mb-6 group-hover:bg-brand-yellow/20 transition-colors">
-                            <i
-                                class={`${card.icon} text-4xl text-brand-blue group-hover:text-brand-yellow transition-colors`}
+                            <Icon
+                                name={card.icon.replace("ri-", "ri:")}
+                                class="text-4xl text-brand-blue group-hover:text-brand-yellow transition-colors"
                             />
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-4">
@@ -58,3 +60,64 @@ const cards = [
         </div>
     </div>
 </section>
+
+<script>
+    import { gsap } from "gsap";
+
+    document.addEventListener("astro:page-load", () => {
+        const section = document.getElementById("documents");
+        const cards = document.querySelectorAll(".document-card");
+
+        if (!section || cards.length === 0) return;
+
+        // Set initial state
+        gsap.set(cards, { opacity: 0, y: 30 });
+
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+        if (isMobile) {
+            // Mobile: Animate each card individually as it appears
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            gsap.to(entry.target, {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.6,
+                                ease: "power2.out",
+                                clearProps: "all",
+                            });
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.1 },
+            );
+
+            cards.forEach((card) => observer.observe(card));
+        } else {
+            // Desktop: Animate all cards with stagger when section appears
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            gsap.to(cards, {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.8,
+                                stagger: 0.2,
+                                ease: "power2.out",
+                                clearProps: "all",
+                            });
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.15 },
+            );
+
+            observer.observe(section);
+        }
+    });
+</script>

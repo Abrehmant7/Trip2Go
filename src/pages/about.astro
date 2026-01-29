@@ -4,6 +4,7 @@ import Testimonials from "../components/Testimonials.astro";
 import heroImage from "../assets/hero3.jpg";
 import { Image } from "astro:assets";
 import logo from "../assets/logo.png";
+import { Icon } from "astro-icon/components";
 
 const stats = [
     {
@@ -89,6 +90,7 @@ const stats = [
                     >
                     </div>
                     <Image
+                        id="about-logo"
                         src={logo}
                         alt="Trip2Go Logo"
                         class="relative z-10 w-full h-auto shadow-2xl bg-brand-yellow hover:scale-[1.02] transition-transform duration-500"
@@ -106,12 +108,16 @@ const stats = [
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                     {
                         stats.map((stat) => (
-                            <div class="p-6">
-                                <i
-                                    class={`${stat.icon} text-5xl text-brand-yellow mb-4`}
+                            <div class="p-6 stat-item">
+                                <Icon
+                                    name={stat.icon.replace("ri-", "ri:")}
+                                    class="stat-icon text-5xl text-brand-yellow mb-4 inline-block"
                                 />
-                                <h3 class="text-4xl font-bold mb-2">
-                                    {stat.number}
+                                <h3
+                                    class="text-4xl font-bold mb-2 stat-number"
+                                    data-value={stat.number}
+                                >
+                                    0{/* Initial value for counter */}
                                 </h3>
                                 <p class="text-blue-200">{stat.label}</p>
                             </div>
@@ -136,3 +142,86 @@ const stats = [
         </section>
     </main>
 </Layout>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("astro:page-load", () => {
+        // Logo Animation (3D Rotation & Fade In)
+        const logo = document.querySelector("#about-logo");
+        if (logo) {
+            gsap.fromTo(
+                logo,
+                {
+                    opacity: 0,
+                    rotationY: 90, // Start rotated 90deg (invisible edge-on)
+                    scale: 0.8,
+                },
+                {
+                    scrollTrigger: {
+                        trigger: logo,
+                        start: "top 80%",
+                        toggleActions: "play none none reverse",
+                    },
+                    opacity: 1,
+                    rotationY: 0,
+                    scale: 1,
+                    duration: 1.5,
+                    ease: "elastic.out(1, 0.75)",
+                },
+            );
+        }
+
+        // Stats Counter Animation
+        const statItems = document.querySelectorAll(".stat-item");
+
+        statItems.forEach((item) => {
+            const numberEl = item.querySelector(".stat-number");
+            const iconEl = item.querySelector(".stat-icon");
+
+            if (numberEl) {
+                const rawValue = numberEl.getAttribute("data-value") || "0";
+                // extract number part (e.g. "5000+" -> 5000)
+                const endValue = parseFloat(rawValue.replace(/[^0-9.]/g, ""));
+                const suffix = rawValue.replace(/[0-9.]/g, ""); // e.g. "+" or "%"
+
+                // Animate Icon
+                if (iconEl) {
+                    gsap.from(iconEl, {
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 85%",
+                        },
+                        scale: 0,
+                        rotation: -180,
+                        duration: 1,
+                        ease: "back.out(1.7)",
+                    });
+                }
+
+                // Animate Number
+                gsap.fromTo(
+                    numberEl,
+                    { innerText: 0 },
+                    {
+                        innerText: endValue,
+                        duration: 2,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 85%",
+                        },
+                        snap: { innerText: 1 }, // counting integers
+                        onUpdate: function () {
+                            numberEl.innerHTML =
+                                Math.ceil(this.targets()[0].innerText) + suffix;
+                        },
+                    },
+                );
+            }
+        });
+    });
+</script>

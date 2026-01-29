@@ -4,8 +4,17 @@ import Nav from "../components/Navbar.astro";
 import FloatingContact from "../components/FloatingContact.astro";
 import Footer from "../components/Footer.astro";
 import { ClientRouter } from "astro:transitions";
+import "@fontsource/plus-jakarta-sans/300.css";
+import "@fontsource/plus-jakarta-sans/400.css";
+import "@fontsource/plus-jakarta-sans/500.css";
+import "@fontsource/plus-jakarta-sans/600.css";
+import "@fontsource/plus-jakarta-sans/700.css";
+import "@fontsource/plus-jakarta-sans/800.css";
 
-const { title = "Trip2Go - Your Guide to the World" } = Astro.props;
+const {
+    title = "Trip2Go - Your Guide to the World",
+    description = "Trip2Go offers premium travel packages, flight bookings, and hassle-free document services for your dream destinations.",
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -13,21 +22,10 @@ const { title = "Trip2Go - Your Guide to the World" } = Astro.props;
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content={description} />
         <link rel="icon" type="image/png" href="/logo.png" />
         <title>{title}</title>
         <ClientRouter />
-        <!-- Fonts: Plus Jakarta Sans -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-            rel="stylesheet"
-        />
-        <!-- Icons: Remix Icon -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
-            rel="stylesheet"
-        />
     </head>
     <body
         class="font-sans text-gray-800 bg-gray-50 overflow-x-hidden min-h-screen flex flex-col"

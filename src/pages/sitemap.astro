@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import heroImage from "../assets/hero3.jpg";
+import { Icon } from "astro-icon/components";
 
 const sections = [
     {
@@ -58,7 +59,10 @@ const sections = [
                                             href={link.href}
                                             class="flex items-center text-gray-700 hover:text-brand-blue hover:translate-x-1 transition-all duration-300 font-medium"
                                         >
-                                            <i class="ri-arrow-right-s-line mr-2 text-brand-yellow" />
+                                            <Icon
+                                                name="ri:arrow-right-s-line"
+                                                class="mr-2 text-brand-yellow"
+                                            />
                                             {link.label}
                                         </a>
                                     </li>

@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import heroImage from "../assets/privacy-policy.jpg";
+import { Icon } from "astro-icon/components";
 
 const primaryPersonalData = [
     "Complete legal name as appears on official documentation",
@@ -234,14 +235,19 @@ const definations = [
                     <h3
                         class="text-lg font-bold text-gray-800 mb-4 flex items-center"
                     >
-                        <i class="ri-file-user-line text-brand-yellow mr-2"></i> Primary
-                        Personal Information
+                        <Icon
+                            name="ri:file-user-line"
+                            class="text-brand-yellow mr-2"
+                        /> Primary Personal Information
                     </h3>
                     <ul class="space-y-2">
                         {
                             primaryPersonalData.map((item) => (
                                 <li class="flex items-start text-gray-600">
-                                    <i class="ri-checkbox-circle-fill text-green-500 mr-2 mt-1 shrink-0" />
+                                    <Icon
+                                        name="ri:checkbox-circle-fill"
+                                        class="text-green-500 mr-2 mt-1 shrink-0"
+                                    />
                                     {item}
                                 </li>
                             ))
@@ -253,8 +259,10 @@ const definations = [
                     <h3
                         class="text-lg font-bold text-gray-800 mb-4 flex items-center"
                     >
-                        <i class="ri-smartphone-line text-brand-yellow mr-2"
-                        ></i> Usage and Technical Data
+                        <Icon
+                            name="ri:smartphone-line"
+                            class="text-brand-yellow mr-2"
+                        /> Usage and Technical Data
                     </h3>
                     <p
                         class="text-gray-600 leading-relaxed bg-blue-50 p-6 rounded-lg border-l-4 border-brand-blue"
@@ -330,7 +338,10 @@ const definations = [
                         {
                             dataProcessingPurposes.map((purpose) => (
                                 <li class="flex items-start text-gray-700 font-medium">
-                                    <i class="ri-arrow-right-circle-fill text-brand-yellow mr-3 mt-1" />
+                                    <Icon
+                                        name="ri:arrow-right-circle-fill"
+                                        class="text-brand-yellow mr-3 mt-1"
+                                    />
                                     {purpose}
                                 </li>
                             ))
@@ -427,7 +438,10 @@ const definations = [
                     {
                         userRights.map((right) => (
                             <div class="flex items-center bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
-                                <i class="ri-scales-3-line text-brand-blue mr-3 text-xl" />
+                                <Icon
+                                    name="ri:scales-3-line"
+                                    class="text-brand-blue mr-3 text-xl"
+                                />
                                 <span class="text-gray-700 font-medium">
                                     {right}
                                 </span>
@@ -455,14 +469,20 @@ const definations = [
                         href="mailto:info@trip2go.co.uk"
                         class="hover:text-brand-yellow transition-colors flex items-center"
                     >
-                        <i class="ri-mail-line mr-3 text-brand-yellow"></i> info@trip2go.co.uk
+                        <Icon
+                            name="ri:mail-line"
+                            class="mr-3 text-brand-yellow"
+                        /> info@trip2go.co.uk
                     </a>
                     <a
                         href="https://trip2go.co.uk"
                         target="_blank"
                         class="hover:text-brand-yellow transition-colors flex items-center"
                     >
-                        <i class="ri-global-line mr-3 text-brand-yellow"></i> https://trip2go.co.uk
+                        <Icon
+                            name="ri:global-line"
+                            class="mr-3 text-brand-yellow"
+                        /> https://trip2go.co.uk
                     </a>
                 </div>
                 <div

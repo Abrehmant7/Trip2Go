@@ -1,0 +1,239 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import heroImage from "../../assets/canada.jpg";
+import { Image } from "astro:assets";
+import cnTowerImg from "../../assets/cn.jpg";
+import niagaraImg from "../../assets/niagraa falls.jpg";
+import { Icon } from "astro-icon/components";
+
+const packageDetails = {
+    title: "Toronto, Canada",
+    dates: "02 March to 10 March",
+    price: "£1132",
+    description:
+        "Experience the vibrant city of Toronto and the majestic Niagara Falls.",
+    includes: [
+        "Return Flights (London - Toronto)",
+        "8 Nights Accommodation",
+        "Niagara Falls Transportation",
+        "CN Tower Tickets",
+        "St. Lawrence Market Visit",
+    ],
+    highlights: [
+        {
+            title: "Westlake Boutique Hotel",
+            description: "Luxury stay from 02 March to 10 March",
+            price: "£500",
+            icon: "ri:hotel-bed-fill",
+        },
+        {
+            title: "Round Trip Flights",
+            description: "London to Toronto & Toronto to London",
+            price: "£332",
+            icon: "ri:plane-fill",
+        },
+        {
+            title: "Niagara Falls Trip",
+            description: "Transportation to the world-famous falls",
+            price: "£100",
+            icon: "ri:bus-fill",
+        },
+        {
+            title: "City Attractions",
+            description: "CN Tower Tickets and Visit of St Lawrence Market",
+            price: "£200",
+            icon: "ri:ticket-2-fill", // or camera
+        },
+    ],
+};
+---
+
+<Layout title="Canada Package - Trip2Go">
+    <Hero
+        PageName="canada-package"
+        image={heroImage}
+        title="Experience Canada"
+        subtitle="Toronto & Niagara Falls Adventure"
+    />
+
+    <main class="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header Section -->
+            <div class="text-center mb-16">
+                <div
+                    class="inline-flex items-center bg-brand-yellow text-gray-900 px-6 py-2 rounded-full font-bold mb-6 shadow-md"
+                >
+                    <Icon name="ri:calendar-event-line" class="mr-2 text-xl" />
+                    {packageDetails.dates}
+                </div>
+                <h2
+                    class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 font-display"
+                >
+                    {packageDetails.title}
+                </h2>
+                <p
+                    class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+                >
+                    {packageDetails.description}
+                </p>
+            </div>
+
+            <!-- Pricing & Inclusions Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+                <!-- Main Package Card -->
+                <div
+                    class="lg:col-span-2 bg-white rounded-none shadow-xl border-t-8 border-brand-blue overflow-hidden"
+                >
+                    <div class="p-8 md:p-12">
+                        <h3
+                            class="text-2xl font-bold text-gray-900 mb-6 flex items-center"
+                        >
+                            <Icon
+                                name="ri:suitcase-3-line"
+                                class="text-brand-yellow mr-3 text-3xl"
+                            />
+                            Package Breakdown
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {
+                                packageDetails.highlights.map((item) => (
+                                    <div class="flex items-start p-4 bg-gray-50 rounded-lg border border-gray-100 hover:border-brand-blue/30 transition-colors">
+                                        <div class="bg-white p-3 rounded-full shadow-sm mr-4 text-brand-blue">
+                                            <Icon
+                                                name={item.icon}
+                                                class="text-2xl"
+                                            />
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-gray-900">
+                                                {item.title}
+                                            </h4>
+                                            <p class="text-sm text-gray-600 mb-1">
+                                                {item.description}
+                                            </p>
+                                            <div class="text-brand-yellow font-bold">
+                                                {item.price}
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+
+                        <!-- Disclaimer -->
+                        <div
+                            class="mt-8 bg-yellow-50 border border-brand-yellow text-brand-blue p-4 flex items-start gap-3 rounded-lg"
+                        >
+                            <Icon
+                                name="ri:information-fill"
+                                class="text-xl mt-0.5 shrink-0"
+                            />
+                            <p class="text-sm font-medium">
+                                Disclaimer: Prices change depending on occasions
+                                and flight/hotel prices availability.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price Summary Card -->
+                <div
+                    class="bg-brand-blue text-white rounded-none shadow-xl p-8 md:p-12 flex flex-col justify-between relative overflow-hidden group"
+                >
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-brand-yellow rounded-full mix-blend-multiply filter blur-3xl opacity-20 group-hover:opacity-30 transition-opacity"
+                    >
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">
+                            Total Package Price
+                        </h3>
+                        <p class="text-blue-200 mb-8">
+                            Per person, based on double occupancy
+                        </p>
+                        <div
+                            class="text-5xl md:text-6xl font-extrabold text-brand-yellow mb-8 tracking-tight"
+                        >
+                            {packageDetails.price}
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            {
+                                packageDetails.includes.map((inc) => (
+                                    <li class="flex items-center text-blue-50">
+                                        <Icon
+                                            name="ri:check-double-line"
+                                            class="text-brand-yellow mr-3 text-xl"
+                                        />
+                                        {inc}
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </div>
+                    <a
+                        href="/contact?package=canada"
+                        class="w-full bg-brand-yellow text-gray-900 font-bold py-4 rounded-none shadow-lg hover:bg-white hover:text-brand-blue transition-all duration-300 text-center uppercase tracking-wider flex items-center justify-center gap-2"
+                    >
+                        Book Now <Icon name="ri:arrow-right-line" />
+                    </a>
+                </div>
+            </div>
+
+            <!-- Gallery / Visuals -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="relative group overflow-hidden shadow-2xl h-96">
+                    <Image
+                        src={cnTowerImg}
+                        alt="CN Tower"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        widths={[600, 900]}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    <div
+                        class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent flex items-end p-8"
+                    >
+                        <div>
+                            <h3
+                                class="text-3xl font-bold text-white mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500"
+                            >
+                                CN Tower & City
+                            </h3>
+                            <p
+                                class="text-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100"
+                            >
+                                Explore the heights of Toronto and the historic
+                                St. Lawrence Market.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden shadow-2xl h-96">
+                    <Image
+                        src={niagaraImg}
+                        alt="Niagara Falls"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        widths={[600, 900]}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    <div
+                        class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent flex items-end p-8"
+                    >
+                        <div>
+                            <h3
+                                class="text-3xl font-bold text-white mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500"
+                            >
+                                Niagara Falls
+                            </h3>
+                            <p
+                                class="text-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100"
+                            >
+                                Witness the breathtaking power of nature.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>

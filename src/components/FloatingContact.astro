@@ -1,9 +1,9 @@
 ---
-
+import { Icon } from "astro-icon/components";
 ---
 
 <div
-    class="fixed right-0 top-4/5 md:top-2/3 -translate-y-1/2 z-50 flex flex-col gap-2 p-2 bg-white/80 backdrop-blur-sm shadow-lg border border-r-0 border-gray-100/50"
+    class="fixed right-0 top-5/6 md:top-2/3 -translate-y-1/2 z-50 flex flex-col gap-2 p-2 bg-transparent md:bg-white/80 backdrop-blur-none md:backdrop-blur-sm shadow-none md:shadow-lg border-none md:border md:border-r-0 md:border-gray-100/50"
 >
     <!-- WhatsApp -->
     <a
@@ -13,7 +13,7 @@
         class="w-10 h-10 flex items-center justify-center rounded-full bg-[#25D366] text-white hover:scale-110 transition-transform duration-300 shadow-md group relative"
         aria-label="Contact us on WhatsApp"
     >
-        <i class="ri-whatsapp-fill text-xl"></i>
+        <Icon name="ri:whatsapp-fill" class="text-xl" />
         <span
             class="absolute right-full mr-2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none"
         >
@@ -27,7 +27,7 @@
         class="w-10 h-10 flex items-center justify-center rounded-full bg-brand-blue text-white hover:scale-110 transition-transform duration-300 shadow-md group relative"
         aria-label="Call us"
     >
-        <i class="ri-phone-fill text-xl"></i>
+        <Icon name="ri:phone-fill" class="text-xl" />
         <span
             class="absolute right-full mr-2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none"
         >
@@ -41,7 +41,7 @@
         class="w-10 h-10 hidden md:flex items-center justify-center rounded-full bg-brand-yellow text-brand-blue hover:scale-110 transition-transform duration-300 shadow-md group relative"
         aria-label="Send us a message"
     >
-        <i class="ri-message-2-fill text-xl"></i>
+        <Icon name="ri:message-2-fill" class="text-xl" />
         <span
             class="absolute right-full mr-2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none"
         >

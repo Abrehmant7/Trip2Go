@@ -2,29 +2,33 @@
 import { Image } from "astro:assets";
 import TorontoImg from "../assets/canada.jpg";
 import ParisImg from "../assets/france.jpg";
-import AmsterdamImg from "../assets/netherlands.jpg";
+import GreeceImg from "../assets/Greece.jpg";
+import { Icon } from "astro-icon/components";
 
 const destinations = [
     {
-        name: "Toronto, Canada",
-        description: "Experience the majestic Rockies and vibrant cities.",
-        image: TorontoImg,
-        price: "£450",
-        duration: "5 Nights",
+        name: "Athens, Greece",
+        description: "Explore the ancient ruins and sunny islands.",
+        image: GreeceImg,
+        price: "£286", // Sum of flight + hotel + act roughly? Or just base package price? User didn't specify package price. France was £300. I'll summarize components: 176+45+65 = 286.
+        duration: "7 Nights", // 2 to 9 March is 7 nights
+        link: "/packages/greece"
     },
     {
         name: "Paris, France",
         description: "Discover the romantic streets and artistic heritage.",
         image: ParisImg,
-        price: "£300",
-        duration: "5 Nights",
+        price: "£400",
+        duration: "Flexible",
+        link: "/packages/france", // New detailed page
     },
     {
-        name: "Amsterdam, Netherlands",
-        description: "Explore charming canals, tulip fields, and historic icons.",
-        image: AmsterdamImg,
-        price: "£250",
-        duration: "5 Nights",
+        name: "Toronto, Canada",
+        description: "Experience the majestic Rockies and vibrant cities.",
+        image: TorontoImg,
+        price: "£1132",
+        duration: "8 Nights",
+        link: "/packages/canada"
     },
 ];
 ---
@@ -41,11 +45,39 @@ const destinations = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <!-- Section Header -->
         <div class="text-center mb-16">
-            <h2
-                class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 drop-shadow-sm"
-            >
-                Visit Best Destinations<br /> with us
-            </h2>
+            <div class="overflow-hidden">
+                <h2
+                    id="destinations-title"
+                    class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 drop-shadow-sm opacity-0 translate-y-8"
+                >
+                    Visit Best Destinations<br /> with us
+                </h2>
+            </div>
+            
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("astro:page-load", () => {
+        const title = document.getElementById("destinations-title");
+        
+        if (title) {
+           gsap.to(title, {
+            scrollTrigger: {
+                trigger: title,
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+            },
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out"
+           });
+        }
+    });
+</script>
         </div>
 
         <!-- Cards Grid -->
@@ -83,14 +115,15 @@ const destinations = [
                             <p class="text-blue-100 mb-4">{dest.description}</p>
                             <div class="flex items-center justify-between">
                                 <span class="text-blue-200 flex items-center gap-2">
-                                    <i class="ri-timer-flash-line text-brand-yellow"></i>
+                                    <Icon name="ri:timer-flash-line" class="text-brand-yellow" />
                                     {dest.duration}
                                 </span>
-                                <button
-                                    class="px-6 py-2 bg-brand-yellow text-gray-900 rounded-none font-semibold hover:bg-white hover:text-brand-yellow transition-all duration-300 border border-brand-yellow"
+                                <a
+                                    href={dest.link}
+                                    class="px-6 py-2 bg-brand-yellow text-gray-900 rounded-none font-semibold hover:bg-white hover:text-brand-yellow transition-all duration-300 border border-brand-yellow inline-block"
                                 >
                                     Learn More
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>

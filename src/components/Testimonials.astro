@@ -4,6 +4,7 @@ import dhavalImg from "../assets/dhaval limbani.png";
 import sriImg from "../assets/Sri.png";
 import habibImg from "../assets/Habib Oriolowo.png";
 import omarImg from "../assets/Omar Saig.png";
+import { Icon } from "astro-icon/components";
 
 const testimonials = [
     {
@@ -57,16 +58,16 @@ const testimonials = [
             <div
                 class="flex justify-center items-center space-x-2 text-brand-yellow mb-4"
             >
-                <i class="ri-star-fill text-2xl"></i>
-                <i class="ri-star-fill text-2xl"></i>
-                <i class="ri-star-fill text-2xl"></i>
-                <i class="ri-star-fill text-2xl"></i>
-                <i class="ri-star-fill text-2xl"></i>
+                <Icon name="ri:star-fill" class="text-2xl" />
+                <Icon name="ri:star-fill" class="text-2xl" />
+                <Icon name="ri:star-fill" class="text-2xl" />
+                <Icon name="ri:star-fill" class="text-2xl" />
+                <Icon name="ri:star-fill" class="text-2xl" />
             </div>
             <p class="text-gray-600 font-medium">
                 Rated Excellent on <span
                     class="font-bold text-[#00b67a] items-center justify-center inline-flex gap-1"
-                    ><i class="ri-star-smile-fill"></i> Trustpilot</span
+                    ><Icon name="ri:star-smile-fill" /> Trustpilot</span
                 >
             </p>
         </div>
@@ -89,13 +90,13 @@ const testimonials = [
                 id="prev-btn"
                 class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-6 z-10 w-12 h-12 bg-white rounded-full shadow-xl items-center justify-center text-brand-blue hover:text-brand-yellow hover:scale-110 transition-all duration-300 border border-gray-100 hidden md:flex"
             >
-                <i class="ri-arrow-left-s-line text-3xl"></i>
+                <Icon name="ri:arrow-left-s-line" class="text-3xl" />
             </button>
             <button
                 id="next-btn"
                 class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-6 z-10 w-12 h-12 bg-white rounded-full shadow-xl items-center justify-center text-brand-blue hover:text-brand-yellow hover:scale-110 transition-all duration-300 border border-gray-100 hidden md:flex"
             >
-                <i class="ri-arrow-right-s-line text-3xl"></i>
+                <Icon name="ri:arrow-right-s-line" class="text-3xl" />
             </button>
 
             <!-- Scrollable Area -->
@@ -108,7 +109,7 @@ const testimonials = [
                     testimonials.map((testimonial) => (
                         <div class="min-w-[300px] md:min-w-[350px] bg-brand-blue p-8 rounded-none shadow-xl border-t-4 border-brand-yellow snap-center flex flex-col transform transition-all hover:-translate-y-1">
                             <div class="mb-4 text-brand-yellow text-lg">
-                                <i class="ri-double-quotes-l" />
+                                <Icon name="ri:double-quotes-l" />
                             </div>
                             <p class="text-blue-100 italic mb-6 grow">
                                 "{testimonial.review}"
@@ -134,11 +135,11 @@ const testimonials = [
                                     </h4>
                                     <div class="flex text-brand-yellow text-xs">
                                         <>
-                                            <i class="ri-star-fill" />
-                                            <i class="ri-star-fill" />
-                                            <i class="ri-star-fill" />
-                                            <i class="ri-star-fill" />
-                                            <i class="ri-star-fill" />
+                                            <Icon name="ri:star-fill" />
+                                            <Icon name="ri:star-fill" />
+                                            <Icon name="ri:star-fill" />
+                                            <Icon name="ri:star-fill" />
+                                            <Icon name="ri:star-fill" />
                                         </>
                                     </div>
                                 </div>
@@ -156,9 +157,10 @@ const testimonials = [
                     class="inline-flex items-center bg-[#00b67a] text-white font-bold py-3 px-8 rounded-none hover:bg-[#009c69] transition-colors shadow-lg group"
                 >
                     <span>Read more on Trustpilot</span>
-                    <i
-                        class="ri-external-link-line ml-2 group-hover:translate-x-1 transition-transform"
-                    ></i>
+                    <Icon
+                        name="ri:external-link-line"
+                        class="ml-2 group-hover:translate-x-1 transition-transform"
+                    />
                 </a>
             </div>
         </div>

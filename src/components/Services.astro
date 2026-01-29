@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { Image } from "astro:assets";
 import documentsImg from "../assets/documents.jpg";
+import { Icon } from "astro-icon/components";
 
 const services = [
     {
@@ -24,7 +25,7 @@ const services = [
 ---
 
 <!-- Services Section -->
-<section class="py-16 md:py-24 bg-brand-blue relative overflow-hidden">
+<section id="services-section" class="py-16 md:py-24 bg-brand-blue relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
             <!-- Left Column: Header + 2 Cards -->
@@ -49,8 +50,7 @@ const services = [
                     {
                         services.map((service) => (
                             <div
-
-                                class="group bg-white p-8 text-center text-gray-900 relative overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-none flex flex-col items-center shadow-xl"
+                                class="service-card group bg-white p-8 text-center text-gray-900 relative overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-none flex flex-col items-center shadow-xl"
                             >
                                 <!-- Glow Effect -->
                                 <div
@@ -62,9 +62,10 @@ const services = [
                                         class="absolute inset-0 bg-brand-blue blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-300 rounded-full"
                                     >
                                     </div>
-                                    <i
-                                        class={`text-5xl text-brand-blue relative z-10 ${service.icon}`}
-                                    ></i>
+                                    <Icon
+                                        name={service.icon.replace("ri-", "ri:")}
+                                        class="text-5xl text-brand-blue relative z-10"
+                                    />
                                 </div>
                                 <h3 class="text-xl font-bold mb-3 text-brand-blue">
                                     {service.title}
@@ -84,20 +85,19 @@ const services = [
                                         class="inline-flex items-center text-brand-blue font-bold hover:text-brand-yellow transition-colors text-sm lg:text-xs lg:uppercase lg:tracking-wider"
                                     >
                                         <span>Learn More</span>
-                                    <i class="ri-arrow-right-line ml-2 lg:ml-1"
-                                    ></i>
+                                        <Icon name="ri:arrow-right-line" class="ml-2 lg:ml-1" />
                                     </a>
                                 </div>
                             </div>
                         ))
-                    }   
+                    }
                 </div>
             </div>
 
             <!-- Right Column: Tall Card 3 -->
             <div class="lg:col-span-4 h-full">
                 <!-- Card 3: Visa Consultation (Responsive: Normal on Mobile, Fancy on Desktop) -->
-                <div class="h-full relative group">
+                <div class="service-card h-full relative group">
                     <!-- Background Image (Hidden on Mobile, Visible on Desktop) -->
                     <Image
                         src={documentsImg}
@@ -133,9 +133,10 @@ const services = [
                                     class="absolute inset-0 bg-brand-blue blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-300 rounded-full"
                                 >
                                 </div>
-                                <i
-                                    class="ri-passport-line text-5xl lg:text-4xl text-brand-blue relative z-10"
-                                ></i>
+                                <Icon
+                                    name="ri:passport-line"
+                                    class="text-5xl lg:text-4xl text-brand-blue relative z-10"
+                                />
                             </div>
 
                             <h3 class="text-xl font-bold mb-3 text-brand-blue">
@@ -157,8 +158,7 @@ const services = [
                                     class="inline-flex items-center text-brand-blue font-bold hover:text-brand-yellow transition-colors text-sm lg:text-xs lg:uppercase lg:tracking-wider"
                                 >
                                     <span>Learn More</span>
-                                    <i class="ri-arrow-right-line ml-2 lg:ml-1"
-                                    ></i>
+                                    <Icon name="ri:arrow-right-line" class="ml-2 lg:ml-1" />
                                 </a>
                             </div>
                         </div>
@@ -168,3 +168,65 @@ const services = [
         </div>
     </div>
 </section>
+
+<script>
+    import { gsap } from "gsap";
+
+    document.addEventListener("astro:page-load", () => {
+        const section = document.getElementById("services-section");
+        const cards = document.querySelectorAll(".service-card");
+
+        if (!section || cards.length === 0) return;
+
+        // Set initial state
+        gsap.set(cards, { opacity: 0, y: 30 });
+
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+        if (isMobile) {
+            // Mobile: Animate each card individually as it appears
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            gsap.to(entry.target, {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.6,
+                                ease: "power2.out",
+                                clearProps: "all"
+                            });
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.1 } // Lower threshold for mobile to trigger earlier
+            );
+
+            cards.forEach(card => observer.observe(card));
+
+        } else {
+            // Desktop: Animate all cards with stagger when section appears
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            gsap.to(cards, {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.8,
+                                stagger: 0.2,
+                                ease: "power2.out",
+                                clearProps: "all"
+                            });
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.15 }
+            );
+
+            observer.observe(section);
+        }
+    });
+</script>

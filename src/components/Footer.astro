@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { Image } from "astro:assets";
 import logoNew from "../assets/logo-new.png";
+import { Icon } from "astro-icon/components";
 
 const socialLinks = [
     {
@@ -66,7 +67,10 @@ const legalLinks = [
                             href={link.href}
                             class="text-gray-900 hover:text-white transition-colors duration-200"
                         >
-                            <i class={link.icon + " text-3xl"} />
+                            <Icon
+                                name={link.icon.replace("ri-", "ri:")}
+                                class="text-3xl"
+                            />
                         </a>
                     ))
                 }
@@ -149,12 +153,32 @@ const legalLinks = [
                         <li
                             class="flex items-center justify-center md:justify-start gap-2 text-gray-800"
                         >
-                            <i class="ri-mail-send-line"></i> info@trip2go.co.uk
+                            <a
+                                href="mailto:info@trip2go.co.uk"
+                                class="flex items-center gap-2 hover:text-brand-blue transition-colors"
+                            >
+                                <Icon name="ri:mail-send-line" /> info@trip2go.co.uk
+                            </a>
                         </li>
                         <li
                             class="flex items-center justify-center md:justify-start gap-2 text-gray-800"
                         >
-                            <i class="ri-phone-line"></i> +44 1233 538140
+                            <a
+                                href="tel:+441233538140"
+                                class="flex items-center gap-2 hover:text-brand-blue transition-colors"
+                            >
+                                <Icon name="ri:phone-line" /> +44 1233 538140
+                            </a>
+                        </li>
+                        <li
+                            class="flex items-start justify-center md:justify-start gap-2 text-gray-800"
+                        >
+                            <Icon
+                                name="ri:map-pin-line"
+                                class="mt-1 shrink-0"
+                            />
+                            <span>3 Maryam close Rainham RM 13 9PE, London</span
+                            >
                         </li>
                     </ul>
                 </div>
